@@ -1,0 +1,241 @@
+@media screen and (min-width: 1600px) {
+  .container {
+    max-width: 1450px;
+  }
+}
+
+/* laptop devices */
+@media only screen and (min-width: 1200px) and (max-width: 1365px) {
+}
+
+/* large tablet devices */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* medium tablet devices */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+/* small tablet devices */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+}
+
+/* large mobile devices */
+@media only screen and (min-width: 480px) and (max-width: 575px) {
+}
+
+/* mobile devices */
+@media only screen and (min-width: 375px) and (max-width: 479px) {
+  /* index page style starts */
+
+  .header--content--area--wrapper .menu--links--wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 3000;
+    background-color: var(--bg--deep);
+    width: 0%;
+    height: 100vh;
+    padding-top: 100px;
+    transition: 0.3s ease-in-out;
+    overflow: hidden;
+    visibility: visible;
+  }
+
+  .header--content--area--wrapper .menu--links--wrapper.active {
+    width: 80%;
+    opacity: 1;
+    visibility: visible;
+    overflow: auto;
+  }
+  .header--content--area--wrapper .menu--links--wrapper ul {
+    flex-direction: column;
+    min-width: fit-content;
+    align-items: start;
+    padding-left: 25px;
+  }
+
+  .landing--hero--area--content .intro--btn--wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 64px;
+    flex-direction: column;
+  }
+
+  .header--content--area--wrapper .btn--primary {
+    width: 100px;
+    height: 46px;
+  }
+
+  .btn--primary p,
+  .btn--secondary p {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20.12px;
+  }
+  .header--content--area--wrapper .logo--wrapper {
+    width: 45px;
+    height: 45px;
+    margin-left: 50px;
+  }
+
+  .header--content--area--wrapper .hamburger--icon {
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary--color);
+    position: absolute;
+    top: 52%;
+    left: 10px;
+    display: block;
+    transform: translateY(-50%);
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+    z-index: 3005;
+  }
+
+  .header--content--area--wrapper .hamburger--icon::before {
+    content: "";
+    top: -8px;
+    left: 0;
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background-color: var(--primary--color);
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+  }
+  .header--content--area--wrapper .hamburger--icon::after {
+    content: "";
+    bottom: -8px;
+    left: 0;
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background-color: var(--primary--color);
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+  }
+
+  .header--content--area--wrapper .hamburger--icon.active::before {
+    transform: rotate(-45deg);
+    top: 0px;
+  }
+  .header--content--area--wrapper .hamburger--icon.active::after {
+    transform: rotate(45deg);
+    bottom: 0px;
+  }
+
+  .header--content--area--wrapper .hamburger--icon.active {
+    width: 0px;
+  }
+
+  .cart--area--wrapper.active--wrapper .cart--area--content {
+    max-width: 100%;
+    padding: 25px;
+  }
+  .cart--intro--area h3 {
+    font-size: 28px;
+  }
+  .cart--intro--area .close--cart--btn {
+    width: 25px;
+    height: 25px;
+  }
+  .cart--items--list--wrapper {
+    margin-top: 30px;
+    padding: 0px 0px 30px;
+    gap: 30px;
+    max-height: 400px;
+    overflow-y: scroll;
+    margin-bottom: 40px;
+    min-width: 100%;
+  }
+  .cart--item--img {
+    display: flex;
+    width: 65px;
+    height: 65px;
+    padding: 5px;
+    border-radius: 8px;
+  }
+  .single--cart--item {
+    position: relative;
+    padding-bottom: 50px;
+    max-width: 100%;
+    align-items: start;
+  }
+
+  .item--amount {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .cart--item--price {
+    position: absolute;
+    bottom: 0px;
+    right: 30px;
+    gap: 16px;
+  }
+
+  .item--amount .action--btn {
+    display: flex;
+    width: 28px;
+    height: 24px;
+    padding: 6px;
+    gap: 8px;
+  }
+  .cart--item--price .price {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .cart--item--details .item--title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+  }
+  .checkout--btn {
+    padding: 8px 0px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .item--amount .amount {
+    width: 30px;
+    text-align: center;
+  }
+
+  /* --------------------------||||--------------------- */
+
+  .confidence--step--holder {
+    flex-direction: column;
+  }
+  .we--want--you--section--area--wrapper {
+    display: none;
+  }
+  .hurry--up--area--content {
+    flex-direction: column;
+  }
+  .discover--more--section--area--wrapper,
+  .join--revival--area--wrapper,
+  .mainstream--area--wrapper,
+  .hurry--up--area--wrapper,
+  .landing--hero--area--wrapper {
+    overflow: hidden;
+  }
+  .footer--links--wrapper .footer--menu ul,
+  .footer--links--wrapper .footer--social--links ul {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .confidence--step--holder .single--column .confidence--step {
+    width: 100%;
+  }
+  /* index page style ends */
+}
+
+/* extra small devices */
+@media only screen and (min-width: 320px) and (max-width: 374px) {
+}
