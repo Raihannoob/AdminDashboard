@@ -1,379 +1,179 @@
-function mainStreamSlider() {}
-const mainstreamSwiper = new Swiper(".mainstream--slider--wrapper .swiper", {
-  effect: "coverflow",
-  grabCursor: true,
-  centeredSlides: true,
-  slidesPerView: "2",
-  autoplay: false,
-  loop: true,
-  coverflowEffect: {
-    rotate: 15,
-    stretch: 40,
-    depth: 200,
-    modifier: 3,
-    slideShadows: false,
-  },
-});
-
-mainStreamSlider();
-
-function discoverSlider() {
-  const discoverSwiper = new Swiper(".mySwiper", {
-    slidesPerView: 4,
-    spaceBetween: 30,
-    loop: true,
-    navigation: {
-      nextEl: ".discover--more--slider--wrapper .next--slide--btn",
-      prevEl: ".discover--more--slider--wrapper .previous--slide--btn",
-    },
-  });
-}
-
-discoverSlider();
-
-function cartWrapper() {
-  let wrapper = document.querySelector(".cart--area--wrapper");
-  let openBtn = document.querySelector(".cart--icon");
-  let closeBtn = document.querySelector(".close--cart--btn");
-  let cartContent = document.querySelector(".cart--area--content");
-
-  let amountWrappers = document.querySelectorAll(".item--amount");
-
-  if (wrapper) {
-    // opening wrapper
-    openBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      wrapper.classList.add("active--wrapper");
-    });
-
-    // closing wrapper
-    closeBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      wrapper.classList.remove("active--wrapper");
-    });
-
-    //  closing the wrapper on outside click
-    document.addEventListener("click", (event) => {
-      if (
-        !cartContent.contains(event.target) &&
-        !openBtn.contains(event.target)
-      ) {
-        wrapper.classList.remove("active--wrapper");
-      }
-    });
-  }
-
-  if (amountWrappers) {
-    amountWrappers.forEach((amountWrapper) => {
-      let plusBtn = amountWrapper.querySelector(".plus");
-      let minusBtn = amountWrapper.querySelector(".minus");
-      let amount = amountWrapper.querySelector(".amount");
-
-      let amountNumber = parseInt(amount.value);
-
-      plusBtn.addEventListener("click", () => {
-        amountNumber++;
-        amount.value = amountNumber;
-      });
-      minusBtn.addEventListener("click", () => {
-        if (amountNumber >= 1) {
-          amountNumber--;
-          amount.value = amountNumber;
-        }
-      });
-    });
-  }
-}
-
-cartWrapper();
-
-// copy marquee node
-function marqueeSlider() {
-  let slider = document.querySelector(
-    ".upcoming--project--slider--wrapper .slider"
-  );
-  let wrapper = document.querySelector(".upcoming--project--slider--wrapper ");
-
-  if (slider) {
-    var copy = slider.cloneNode(true);
-    wrapper.appendChild(copy);
-  }
-}
-marqueeSlider();
-
-function donationProgress() {
-  let wrapper = document.querySelector(".campaign--progress--wrapper ");
-
-  let bar = document.querySelector(
-    ".campaign--progress--wrapper .progress--bar"
-  );
-
-  if (wrapper) {
-    document.addEventListener("DOMContentLoaded", () => {
-      bar.classList.add("grow");
-    });
-  }
-}
-
-donationProgress();
-
-function happyUsersSlider() {
-  let wrapper = document.querySelector(".happy--users--sliders--wrapper");
-
-  if (wrapper) {
-    var swiper = new Swiper(wrapper.querySelector(".swiper"), {
-      slidesPerView: 1,
-      spaceBetween: 30,
-      loop: true,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-    });
-  }
-}
-
-happyUsersSlider();
-
-function stepsIndicator() {
-  let wrapper = document.querySelector(
-    ".how--is--this--possible--area--content .steps--list--wrapper"
-  );
-
-  if (wrapper) {
-    let section = document.querySelector(
-      ".how--is--this--possible--area--wrapper"
-    );
-
-    let listIndex = 1;
-
-    let lists = Array.from(wrapper.querySelectorAll("li"));
-
-    function activeList() {
-      lists.slice(0, listIndex).forEach((item) => {
-        item.classList.add("active");
-      });
-    }
-
-    // activeList();
-
-    let wrapperPosition = wrapper.getBoundingClientRect().top;
-    let incrasedBy = 200;
-    let sectionTop = section.getBoundingClientRect().top - incrasedBy;
-    let sectionHeight = section.clientHeight;
-
-    let postionBottom = sectionTop + sectionHeight - incrasedBy;
-
-    let positionMiddle = sectionTop + sectionHeight / 2 - incrasedBy;
-
-    // console.log(wrapperPosition, "top");
-
-    // console.log(positionMiddle, "middle");
-    // console.log(postionBottom, "end");
-
-    // indicator
-    let indicatorTrack = document.querySelector(
-      ".how--is--this--possible--area--content .steps--list--wrapper ul"
-    );
-
-    window.addEventListener("scroll", () => {
-      let scrollPosition = window.scrollY;
-
-      if (scrollPosition > sectionTop) {
-        indicatorTrack.classList.add("start");
-      } else {
-        indicatorTrack.classList.remove("start");
-      }
-      if (scrollPosition > sectionTop && scrollPosition < positionMiddle) {
-        indicatorTrack.classList.remove("start");
-        indicatorTrack.classList.add("middle");
-      } else {
-        indicatorTrack.classList.remove("middle");
-      }
-      if (scrollPosition > positionMiddle) {
-        indicatorTrack.classList.remove("middle");
-        indicatorTrack.classList.add("end");
-      } else {
-        indicatorTrack.classList.remove("end");
-      }
-    });
-  }
-}
-
-stepsIndicator();
-
-function productCategorySlider() {
-  let wrapper = document.querySelector(".product--categories--area--content");
-
-  if (wrapper) {
-    var swiper = new Swiper(".product--categories--area--content .swiper", {
-      slidesPerView: 3,
-      spaceBetween: 20,
-      loop: true,
-      navigation: {
-        nextEl: ".product--categories--area--content .button-next",
-        prevEl: ".product--categories--area--content .button-prev",
-      },
-    });
-  }
-}
-
-productCategorySlider();
-
-// initializing select for whole website
-
-$("select").niceSelect();
-
-function hamburgerIcon() {
-  let icon = document.querySelector(
-    ".header--content--area--wrapper .hamburger--icon"
-  );
-
-  let wrapper = document.querySelector(
-    ".header--content--area--wrapper .menu--links--wrapper"
-  );
-
-  if (icon) {
-    icon.addEventListener("click", () => {
-      icon.classList.toggle("active");
-      wrapper.classList.toggle("active");
-
-      // closing on outside click of document
-      document.addEventListener("click", (event) => {
-        if (!icon.contains(event.target) && !wrapper.contains(event.target)) {
-          icon.classList.remove("active");
-          wrapper.classList.remove("active");
-        }
-      });
-    });
-  }
-}
-
-hamburgerIcon();
-
-// video player
-
-function latestVideoPlayer() {
-  let wrapper = document.querySelector(".latest--video--area--wrapper");
-
-  if (wrapper) {
-    let videos = wrapper.querySelectorAll(".single--video--wrapper");
-
-    videos.forEach((item) => {
-      let playBtn = item.querySelector(".play--btn");
-      let imgSrc = playBtn.querySelector("img");
-      let isPlaying = false;
-      let playBtnSrc = "./assets/images/play-btn.png";
-      let pauseBtnSrc = "./assets/images/pause-btn.png";
-
-      let video = item.querySelector("video");
-
-      playBtn.addEventListener("click", () => {
-        if (!isPlaying) {
-          video.play();
-          playBtn.classList.add("hide");
-          imgSrc.setAttribute("src", pauseBtnSrc);
-        } else {
-          video.pause();
-          imgSrc.setAttribute("src", playBtnSrc);
-        }
-
-        // changing the state
-        isPlaying = !isPlaying;
-      });
-    });
-
-    // video slider
-    var swiper = new Swiper(wrapper.querySelector(".mySwiper"), {
-      navigation: {
-        nextEl: wrapper.querySelector(".button-next"),
-        prevEl: wrapper.querySelector(".button-prev"),
-      },
-      slidesPerView: 2,
-      spaceBetween: 20,
-      loop: true,
-    });
-  }
-}
-
-latestVideoPlayer();
-
-function merchandaiseSlider() {
-  let wrapper = document.querySelector(".recommneded--merchandaise--wrapper");
-
-  if (wrapper) {
-    // video slider
-    var swiper = new Swiper(wrapper.querySelector(".mySwiper"), {
-      navigation: {
-        nextEl: wrapper.querySelector(".button-next"),
-        prevEl: wrapper.querySelector(".button-prev"),
-      },
-      slidesPerView: 4,
-      spaceBetween: 20,
-      loop: true,
-    });
-  }
-}
-merchandaiseSlider();
-
-function salesGoalProgressBar() {
-  let wrapper = document.querySelector(".sales--goal--progressbar--wrapper");
-
-  if (wrapper) {
-    let progressValue = document.querySelector(
-      ".sales--goal--area--content .top--part .value"
-    );
-
-    // calculating the widht percentage based on the goal
-    let progressValueNum = parseInt(progressValue.innerText);
-    let totalGoal = 40000;
-    let barWidth = (progressValueNum / totalGoal) * 100;
-
-    // progress bar
-    let progressBar = wrapper.querySelector(".progress--bar");
-
-    // setting the width based on the value percent
-    progressBar.style.width = `${barWidth}%`;
-
-    // crossing the star mark
-    let barPostion = progressBar.getBoundingClientRect().right;
-
-    let starWrappers = wrapper.querySelectorAll(".star--wrapper svg");
-
-    // for counting purpose
-    let starsLeft = 0;
-    let totalStars = 9;
-
-    console.log(barPostion);
-    starWrappers.forEach((item) => {
-      let starPosition = item.getBoundingClientRect().right;
-
-      // finding out how many stars are left
-      if (starPosition > barPostion) {
-        starsLeft++;
-        
-      }
-    });
-
-    let starsArray = Array.from(starWrappers);
-
-    let starsCrossed = totalStars - starsLeft;
-
-    //  making the stars active
-    starsArray.slice(0, starsCrossed).forEach((item) => {
-      let svgPath = item.querySelector("path");
-
-      svgPath.style.fill = "#fdfe0d";
-    });
-  }
-}
-
-salesGoalProgressBar();
+(function ($) {
+	"use strict";
+
+	$(document).ready(function(){
+
+		$(window).on('scroll', function(){
+			$('header').toggleClass('active', $(this).scrollTop() > 10);
+		})
+
+		$('.hamburger-menu').on('click', function () {
+			$('.line-top, .line-center, .line-bottom, .menu--wrapper').toggleClass('current');
+		})
+
+		// hero slider 
+		$('.hero--slider').owlCarousel({
+			margin: 100,
+			loop: true,
+			nav: true,
+			dots: true,
+			center: true,
+			items: 3,
+			navText: [
+			  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15.0938 19.92L8.57375 13.4C7.80375 12.63 7.80375 11.37 8.57375 10.6L15.0938 4.07996" stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+			  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8.90625 19.92L15.4263 13.4C16.1963 12.63 16.1963 11.37 15.4263 10.6L8.90625 4.07996" stroke="#FF0000" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+			],
+			stagePadding: 0,
+			smartSpeed: 800,
+			responsive: {
+			  
+			  0: {
+				items: 1,
+				center:false,
+			  },
+			  768: {
+				items: 1,
+				center:false,
+			  },
+			  992: {
+				items: 3
+			  }
+			}
+		  });
+
+
+		function handleFilter(){
+			var filters = document.querySelectorAll('.sort--links--wrap li');
+
+			filters.forEach((filter) => {
+				filter.addEventListener('click', (e) => {
+					var target = e.target;
+
+					filters.forEach((filter) => {
+						if(filter !== target){
+							filter.classList.remove('active');
+						}
+					})
+					
+					target.classList.add('active');
+					
+				})
+			})
+		}
+		handleFilter();
+
+
+		function handleAccordion(){
+			var accordions = document.querySelectorAll('.faq--area .accordion-item button');
+			
+			accordions.forEach((item) => {
+				item.addEventListener('click', function(){
+					var accordionItem = item.parentNode.parentNode;
+					
+					accordions.forEach((accItem) => {
+						accItem.parentNode.parentNode.classList.remove('active');
+					})
+					
+					if(!accordionItem.classList.contains('active')){
+						accordionItem.classList.add('active');
+					}
+
+				})
+				
+			})
+		}
+		handleAccordion();
+		
+		function handleUserOption(){
+			var toggle = document.querySelector('.user--options .toggle');
+			var dropdown = document.querySelector('.user--options .dropdown');
+			if(toggle){
+				toggle.addEventListener('click', function(e){
+					e.preventDefault();
+					dropdown.classList.toggle('show');
+				})
+
+				// remove when click outside 
+				document.addEventListener('click', function(e){
+					var target = e.target;
+					if(!dropdown.contains(target) && !toggle.contains(target)){
+						dropdown.classList.remove('show');
+					}
+				})
+			}
+			
+		}
+		 handleUserOption();
+
+		// upload image 
+		function uploadImage() {
+			var Input = document.getElementById('image-input');
+			var PreviewBox = document.getElementById('image-preview');
+			var uploadLabel = document.querySelector('.upload-label');
+		
+			if (Input) {
+				Input.onchange = function(e) {
+					var file = e.target.files[0];
+					var reader = new FileReader();
+		
+					// Check if file size is greater than 1 MB
+					if (file.size > 300 * 1024) {
+						alert("Please select an image file smaller than 300 KB.");
+						Input.value = ''; // Clear the file input
+						PreviewBox.innerHTML = ''; // Clear the preview
+						return; // Stop further execution
+					}
+		
+					reader.onload = function(e) {
+						PreviewBox.innerHTML = '<img src="' + e.target.result + '"/>';
+						uploadLabel.classList.add('removed');
+					};
+					reader.readAsDataURL(file);
+				}
+			}
+		}
+		uploadImage();
+
+		function handleRentCard(){
+			var toggleBtn = document.querySelectorAll('.actions .add--review');
+			var cardsWrap = document.querySelectorAll('.history--card--wrapper');
+
+					cardsWrap.forEach((card) => {
+						var toggleBtn = card.querySelector('.add--review');
+						var review = card.querySelector('.review');
+
+
+						toggleBtn.addEventListener('click', function(e){
+							e.preventDefault();
+							review.classList.toggle('show');
+
+							if(review.classList.contains('show')){
+								toggleBtn.innerText = 'Hide Review'
+							}else{
+								toggleBtn.innerText = 'Add Review'
+							}
+						})
+						
+						
+						
+					})
+
+		}
+		handleRentCard();
+		// dateDropper
+		new dateDropper({
+			selector: '.pick--date',
+			format: "d/m/y",
+			expandedDefault: true,
+			showArrowsOnHover: true,
+		  });
+
+		$('.timepick').mdtimepicker();
+
+
+
+	});
+	
+
+
+})(jQuery);

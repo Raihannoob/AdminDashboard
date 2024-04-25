@@ -1,904 +1,165 @@
 @extends('auth.layouts.app')
 
-@section('title','LogIn')
+@section('title', 'LogIn')
 
 @section('content')
-    {{-- <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
-                <div class="row flex-grow">
-                    <div class="col-lg-6 d-flex align-items-center justify-content-center">
-                        <div class="auth-form-transparent text-left p-3">
-                            <div class="brand-logo">
-                                <img src="https://demo.bootstrapdash.com/star-admin-2-pro/themes/assets/images/logo.svg" alt="logo">
-                            </div>
-                            <h4>Welcome back!</h4>
-                            <h6 class="fw-light">Happy to see you again!</h6>
-                            <form class="pt-3" action="{{ route('login') }}" method="POST">
+    <!-- start header  -->
+    <header>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-3">
+                    <!-- logo  -->
+                    <a href="index.html" class="logo">
+                        <img src="{{ asset('frontend/images/logo.svg') }}" alt="">
+                    </a>
+                </div>
+                <div class="col-9">
+                    <div class="menu--wrapper">
+                        <!-- menu  -->
+                        <ul class="menu">
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="listing.html">Car Listing</a>
+                            </li>
+                            <li>
+                                <a href="about.html">About Us</a>
+                            </li>
+                            <li>
+                                <a href="faq.html">FAQs</a>
+                            </li>
+                        </ul>
+                        <!-- button area  -->
+                        <div class="btn--area d-flex align-items-center gap-3">
+                            <a href="login.html" class="button">Log In</a>
+                            <a href="register.html" class="buttonv2">Register</a>
+                        </div>
+                    </div>
+                    <!-- hamburger menu  -->
+                    <div class="hamburger-menu">
+                        <span class="line-top"></span>
+                        <span class="line-center"></span>
+                        <span class="line-bottom"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header  -->
+    <main>
+        <!-- login area start  -->
+        <section class="login--register--area rent--posi">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-md-10">
+                        <div class="login--form user--profile--form">
+                            <h1>Log In</h1>
+                            <form class="form--common" action="{{ route('login') }}" method="POST">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="exampleInputEmail">Email</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend bg-transparent">
-                                          <span class="input-group-text bg-transparent border-right-0" style="height: 92%">
-                                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M405.333 213.874V106.667c0-23.531-19.135-42.667-42.667-42.667h-320C19.135 64 0 83.135 0 106.667V320c0 23.531 19.135 42.667 42.667 42.667h239.215C295.858 411.84 341.073 448 394.667 448c20.625 0 40.906-5.427 58.677-15.708 5.094-2.948 6.844-9.469 3.885-14.573-2.948-5.104-9.479-6.865-14.573-3.885-14.521 8.396-31.115 12.833-47.99 12.833-52.938 0-96-43.063-96-96s43.063-96 96-96 96 43.063 96 96v10.667c0 11.76-9.573 21.333-21.333 21.333-11.76 0-21.333-9.573-21.333-21.333v-42.667A10.66 10.66 0 0 0 437.333 288c-2.869 0-5.447 1.161-7.362 3-9.428-8.401-21.714-13.667-35.305-13.667-29.406 0-53.333 23.927-53.333 53.333S365.26 384 394.667 384c15.896 0 30.03-7.131 39.81-18.202 7.727 10.977 20.44 18.202 34.857 18.202C492.865 384 512 364.865 512 341.333v-10.667c0-61.097-46.956-111.378-106.667-116.792zM42.667 85.333h320c.444 0 .816.227 1.254.254L211.438 210.75c-5.427 3.417-13.292 2.708-16.823.542L41.426 85.585c.433-.026.801-.252 1.241-.252zM384 213.874c-59.711 5.414-106.667 55.695-106.667 116.793 0 3.6.221 7.148.54 10.667H42.667c-11.76 0-21.333-9.573-21.333-21.333V106.667c0-3.021.667-5.874 1.805-8.48L182.022 228.48c6.208 4.052 13.344 6.188 20.646 6.188 7.021 0 13.885-1.979 19.927-5.729a10.367 10.367 0 0 0 1.719-1.156l157.88-129.598c1.139 2.608 1.807 5.461 1.807 8.483v107.206zm10.667 148.793c-17.646 0-32-14.354-32-32s14.354-32 32-32 32 14.354 32 32-14.354 32-32 32z" fill="#1e3bb3" opacity="1" data-original="#000000" class=""></path></g></svg>
-                                          </span>
-                                        </div>
-                                        <input type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="example@mail.com" name="email" value="{{ old('email') }}" autocomplete="email" autofocus required>
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                <div class="input--group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email"@error('email') is-invalid @enderror" id="email"
+                                        placeholder="ENTER YOUR EMAIL" name="email" value="{{ old('email') }}"
+                                        autocomplete="email" autofocus required />
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword">Password</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend bg-transparent">
-                                          <span class="input-group-text bg-transparent border-right-0" style="height: 92%">
-                                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" x="0" y="0" viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="m29.71 28.29-5.41-5.4a15.85 15.85 0 0 0 5.13-5.11l.11-.16a3.1 3.1 0 0 0 0-3.24l-.11-.16A15.84 15.84 0 0 0 9.55 8.14L3.71 2.29a1 1 0 0 0-1.42 1.42l5.41 5.4a15.85 15.85 0 0 0-5.13 5.11l-.11.16a3.1 3.1 0 0 0 0 3.24l.11.16a15.84 15.84 0 0 0 19.88 6.08l5.84 5.85a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM16 8.77a13.79 13.79 0 0 1 11.74 6.51l.1.16a1.07 1.07 0 0 1 0 1.12l-.1.16a13.88 13.88 0 0 1-4.9 4.71l-2.31-2.32a5.44 5.44 0 0 0 1-3.11A5.51 5.51 0 0 0 16 10.5a5.44 5.44 0 0 0-3.11 1l-1.81-1.8A14 14 0 0 1 16 8.77zm-3.07 5.58 4.72 4.72a3.48 3.48 0 0 1-4.72-4.72zm1.42-1.42a3.48 3.48 0 0 1 4.72 4.72zM16 23.23a13.79 13.79 0 0 1-11.74-6.51l-.1-.16a1.07 1.07 0 0 1 0-1.12l.1-.16a13.88 13.88 0 0 1 4.9-4.71l2.31 2.32a5.44 5.44 0 0 0-1 3.11A5.51 5.51 0 0 0 16 21.5a5.44 5.44 0 0 0 3.11-1l1.81 1.8a14 14 0 0 1-4.92.93z" fill="#1e3bb3" opacity="1" data-original="#000000" class=""></path></g></svg>
-                                          </span>
-                                        </div>
-                                        <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="Password" name="password" required autocomplete="current-password">
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                <div class="input--group">
+                                    <label for="password">Password</label>
+                                    <input type="password" @error('password') is-invalid @enderror" id="password"
+                                        placeholder="ENTER YOUR PASSWORD" name="password" required
+                                        autocomplete="current-password" />
                                 </div>
-                                <div class="my-2 d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input">
-                                            Keep me signed in
-                                        </label>
-                                    </div>
-                                    <a href="{{ route('password.request') }}" class="auth-link text-black">Forgot password?</a>
-                                </div>
-                                <div class="my-3 d-grid gap-2">
-                                    <button type="submit" class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn">LOGIN</button>
-                                </div>
-                                <div class="text-center mt-4 fw-light">
-                                    Don't have an account? <a href="{{ route('register') }}" class="text-primary">Create</a>
-                                </div>
+                                <button type="submit" class="button">Log In</button>
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 login-half-bg d-flex flex-row">
-                        <p class="text-white fw-medium text-center flex-grow align-self-end">Copyright &copy; 2021 All rights
-                            reserved.</p>
-                    </div>
                 </div>
             </div>
-            <!-- content-wrapper ends -->
-        </div>
-        <!-- page-body-wrapper ends -->
-    </div> --}}
-        <!-- Header Area Starts -->
-        <header>
-          <div class="container">
-            <div class="header--content--area--wrapper">
-              <!-- hamburger icon -->
-              <div class="hamburger--icon"></div>
-              <!-- logo area -->
-              <div class="logo--wrapper">
-                <a href="index.html">
-                  <img src="{{asset('frontend/images/logo.svg')}}" alt="" />
-                </a>
-              </div>
-              <!-- navbar links area -->
-              <div class="menu--links--wrapper">
+            <img class="rent-img rent-img1" src="{{ asset('frontend/images/rent.svg') }}" alt="">
+            <img class="rent-img rent-img2" src="{{ asset('frontend/images/rent.svg') }}" alt="">
+        </section>
+        <!-- login area end  -->
+    </main>
+    <!-- start footer  -->
+    <footer>
+        <div class="container">
+            <div class="footer--row">
+                <!-- footer--box  -->
+                <div class="footer--box logo--box">
+                    <a href="index.html">
+                        <img src="{{ asset('frontend/images/logo.svg') }}" alt="">
+                    </a>
+                    <p>Our goal is to provide a wide selection of quality cars that are budget friendly.</p>
+                </div>
+                <!-- footer--box -->
+                <div class="footer--box">
+                    <h4>Pages</h4>
+                    <ul>
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="#">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="#">Car</a>
+                        </li>
+                        <li>
+                            <a href="#">Consulting</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- footer box  -->
+                <div class="footer--box">
+                    <h4>Company</h4>
+                    <ul>
+                        <li>
+                            <a href="#">Careers</a>
+                        </li>
+                        <li>
+                            <a href="#">News</a>
+                        </li>
+                        <li>
+                            <a href="#">Author</a>
+                        </li>
+                        <li>
+                            <a href="#">Product Page</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- footer box  -->
+                <div class="footer--box contact">
+                    <h4>Any Questions?</h4>
+                    <ul>
+                        <li>
+                            <a href="mailto:youremail@gmail.com">youremail@gmail.com</a>
+                        </li>
+                        <li>
+                            <p>
+                                Feel free! Ask us anything related to our service
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer--bottom">
+                <p>2024 Powered by Autos Only Rentals</p>
                 <ul>
-                  <li><a href="index.html">HOME</a></li>
-                  <li><a href="who-we-are.html">WHO WE ARE</a></li>
-                  <li><a href="continuity.html">CONTINUITY</a></li>
-                  <li><a href="affiliate.html">AFFILIATE</a></li>
-                  <li><a href="campaign.html">CAMPAIGN</a></li>
-                  <li><a href="shop.html">SHOP</a></li>
-                  <li><a href="community.html">COMMUNITY</a></li>
-                  <li><a href="announcements.html">ANNOUNCEMENTS</a></li>
+                    <li>
+                        <a href="#">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#">Website Terms</a>
+                    </li>
+                    <li>
+                        <a href="#">Cookie Policy </a>
+                    </li>
                 </ul>
-              </div>
-              <!-- button area -->
-              <div class="button--area--wrapper">
-                <!-- cart  -->
-                <a href="#" class="cart--icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="22"
-                    viewBox="0 0 24 22"
-                    fill="none"
-                  >
-                    <path
-                      d="M7.7325 14.0627H7.73362C7.73456 14.0627 7.7355 14.0625 7.73639 14.0625H20.4844C20.6372 14.0625 20.7858 14.0127 20.9077 13.9207C21.0297 13.8287 21.1184 13.6994 21.1604 13.5525L23.9729 3.7088C24.0028 3.60417 24.008 3.49404 23.9881 3.38707C23.9682 3.28009 23.9238 3.17919 23.8583 3.0923C23.7927 3.0054 23.7079 2.9349 23.6105 2.88635C23.5131 2.8378 23.4057 2.81252 23.2969 2.8125H6.11095L5.60836 0.550594C5.57363 0.39442 5.48668 0.254756 5.36188 0.154656C5.23707 0.0545557 5.08186 2.16079e-06 4.92187 0L0.703125 0C0.314766 0 0 0.314766 0 0.703125C0 1.09148 0.314766 1.40625 0.703125 1.40625H4.35792C4.44689 1.80703 6.76317 12.2305 6.89648 12.8302C6.14925 13.155 5.625 13.9001 5.625 14.7656C5.625 15.9287 6.57131 16.875 7.73437 16.875H20.4844C20.8727 16.875 21.1875 16.5602 21.1875 16.1719C21.1875 15.7835 20.8727 15.4688 20.4844 15.4688H7.73437C7.34672 15.4688 7.03125 15.1533 7.03125 14.7656C7.03125 14.3785 7.34564 14.0636 7.7325 14.0627ZM22.3647 4.21875L19.9539 12.6562H8.29837L6.42337 4.21875H22.3647ZM7.03125 18.9844C7.03125 20.1475 7.97756 21.0938 9.14062 21.0938C10.3037 21.0938 11.25 20.1474 11.25 18.9844C11.25 17.8213 10.3037 16.875 9.14062 16.875C7.97756 16.875 7.03125 17.8213 7.03125 18.9844ZM9.14062 18.2812C9.52828 18.2812 9.84375 18.5967 9.84375 18.9844C9.84375 19.372 9.52828 19.6875 9.14062 19.6875C8.75297 19.6875 8.4375 19.372 8.4375 18.9844C8.4375 18.5967 8.75297 18.2812 9.14062 18.2812ZM16.9687 18.9844C16.9687 20.1475 17.9151 21.0938 19.0781 21.0938C20.2412 21.0938 21.1875 20.1474 21.1875 18.9844C21.1875 17.8213 20.2412 16.875 19.0781 16.875C17.9151 16.875 16.9687 17.8213 16.9687 18.9844ZM19.0781 18.2812C19.4658 18.2812 19.7812 18.5967 19.7812 18.9844C19.7812 19.372 19.4658 19.6875 19.0781 19.6875C18.6905 19.6875 18.375 19.372 18.375 18.9844C18.375 18.5967 18.6905 18.2812 19.0781 18.2812Z"
-                      fill="#FFFFEB"
-                    />
-                  </svg>
-
-                  <p class="items">1</p>
-                </a>
-                <!-- login button -->
-                <a href="#" class="btn--primary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="140"
-                    height="49"
-                    viewBox="0 0 140 49"
-                    fill="none"
-                  >
-                    <path
-                      d="M17.4295 1C5.95433 1 -2.01675 12.4233 1.943 23.1936L7.09013 37.1937C9.47696 43.6857 15.6597 48 22.5766 48H117.423C124.34 48 130.523 43.6857 132.91 37.1937L138.057 23.1937C142.017 12.4233 134.046 1 122.57 1H17.4295Z"
-                      fill="#FDFE0D"
-                      stroke="url(#paint0_linear_4513_1248)"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="paint0_linear_4513_1248"
-                        x1="-61.7234"
-                        y1="87.75"
-                        x2="184.297"
-                        y2="56.57"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#FDFE0D" />
-                        <stop offset="1" stop-color="white" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-
-                  <p>LOG IN</p>
-                </a>
-              </div>
             </div>
-          </div>
-        </header>
-        <!-- Header Area Ends -->
-
-        <!-- Main Area Starts -->
-        <main>
-          <section class="login--area--wrapper">
-            <div class="login--area--content">
-              <h3 class="hero--text">Log In</h3>
-
-              <!-- auth form -->
-              <form class="auth--form--wrapper" action="{{ route('login') }}" method="POST">
-                @csrf
-                <div class="input--wrapper">
-
-                  <input type="email"@error('email') is-invalid @enderror" id="exampleInputEmail1" placeholder="ENTER YOUR EMAIL" name="email" value="{{ old('email') }}" autocomplete="email" autofocus required/>
-
-                  <input type="password"  @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="ENTER YOUR PASSWORD" name="password" required autocomplete="current-password"/>
-
-                  <a href="#">Forget password ?</a>
-                </div>
-
-                <button type="submit" class="submit--btn">LOG IN</button>
-              </form>
-
-              <!-- instruction text -->
-              <div class="instruction--text">
-                <p>New to this site? <a href="{{route('register')}}">Sign Up</a></p>
-                <p>Or,</p>
-                <p><a href="#">Continue as guest</a></p>
-              </div>
-            </div>
-          </section>
-        </main>
-        <!-- Main Area Ends -->
-
-        <!-- Footer Area Starts -->
-        <footer>
-          <div class="container">
-            <div class="footer--content">
-              <div class="footer--logo">
-                <img src="{{asset('frontend/images/logo.svg')}}" alt="" />
-              </div>
-
-              <div class="contact--us--wrapper">
-                <h3>CONTACT US</h3>
-
-                <div class="contact--btn--wrapper">
-                  <a href="#" class="btn--secondary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="144"
-                      height="48"
-                      viewBox="0 0 144 48"
-                      fill="none"
-                    >
-                      <path
-                        d="M17.1925 0.5C5.64247 0.5 -2.33346 12.0614 1.76767 22.8587L7.08524 36.8587C9.51837 43.2647 15.6576 47.5 22.5101 47.5H121.49C128.342 47.5 134.482 43.2647 136.915 36.8588L142.232 22.8587C146.333 12.0614 138.358 0.5 126.808 0.5H17.1925Z"
-                        fill="#0F0F00"
-                        stroke="url(#paint0_linear_4513_1427)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_4513_1427"
-                          x1="-64.0851"
-                          y1="87.25"
-                          x2="189.811"
-                          y2="54.0063"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stop-color="#FDFE0D" />
-                          <stop offset="1" stop-color="white" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <p>For Business</p>
-                  </a>
-                  <a href="#" class="btn--secondary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="144"
-                      height="48"
-                      viewBox="0 0 144 48"
-                      fill="none"
-                    >
-                      <path
-                        d="M17.1925 0.5C5.64247 0.5 -2.33346 12.0614 1.76767 22.8587L7.08524 36.8587C9.51837 43.2647 15.6576 47.5 22.5101 47.5H121.49C128.342 47.5 134.482 43.2647 136.915 36.8588L142.232 22.8587C146.333 12.0614 138.358 0.5 126.808 0.5H17.1925Z"
-                        fill="#0F0F00"
-                        stroke="url(#paint0_linear_4513_1427)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_4513_1427"
-                          x1="-64.0851"
-                          y1="87.25"
-                          x2="189.811"
-                          y2="54.0063"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stop-color="#FDFE0D" />
-                          <stop offset="1" stop-color="white" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <p>For Support</p>
-                  </a>
-                  <a href="#" class="btn--secondary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="144"
-                      height="48"
-                      viewBox="0 0 144 48"
-                      fill="none"
-                    >
-                      <path
-                        d="M17.1925 0.5C5.64247 0.5 -2.33346 12.0614 1.76767 22.8587L7.08524 36.8587C9.51837 43.2647 15.6576 47.5 22.5101 47.5H121.49C128.342 47.5 134.482 43.2647 136.915 36.8588L142.232 22.8587C146.333 12.0614 138.358 0.5 126.808 0.5H17.1925Z"
-                        fill="#0F0F00"
-                        stroke="url(#paint0_linear_4513_1427)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_4513_1427"
-                          x1="-64.0851"
-                          y1="87.25"
-                          x2="189.811"
-                          y2="54.0063"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stop-color="#FDFE0D" />
-                          <stop offset="1" stop-color="white" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <p>For Press</p>
-                  </a>
-                  <a href="#" class="btn--secondary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="144"
-                      height="48"
-                      viewBox="0 0 144 48"
-                      fill="none"
-                    >
-                      <path
-                        d="M17.1925 0.5C5.64247 0.5 -2.33346 12.0614 1.76767 22.8587L7.08524 36.8587C9.51837 43.2647 15.6576 47.5 22.5101 47.5H121.49C128.342 47.5 134.482 43.2647 136.915 36.8588L142.232 22.8587C146.333 12.0614 138.358 0.5 126.808 0.5H17.1925Z"
-                        fill="#0F0F00"
-                        stroke="url(#paint0_linear_4513_1427)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_4513_1427"
-                          x1="-64.0851"
-                          y1="87.25"
-                          x2="189.811"
-                          y2="54.0063"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stop-color="#FDFE0D" />
-                          <stop offset="1" stop-color="white" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <p>For Fans</p>
-                  </a>
-                </div>
-              </div>
-
-              <div class="footer--links--wrapper">
-                <div class="footer--menu">
-                  <ul>
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="who-we-are.html">WHO WE ARE</a></li>
-                    <li><a href="continuity.html">CONTINUITY</a></li>
-                    <li><a href="affiliate.html">AFFILIATE</a></li>
-                    <li><a href="campaign.html">CAMPAIGN</a></li>
-                    <li><a href="shop.html">SHOP</a></li>
-                    <li><a href="community.html">COMMUNITY</a></li>
-                    <li><a href="announcements.html">ANNOUNCEMENTS</a></li>
-                    <li><a href="careers.html">CAREERS</a></li>
-                  </ul>
-                </div>
-
-                <div class="footer--social--links">
-                  <ul>
-                    <li>
-                      <a href="#"
-                        ><svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="25"
-                          height="20"
-                          viewBox="0 0 25 20"
-                          fill="none"
-                        >
-                          <path
-                            d="M20.8468 2.01318C19.2822 1.25799 17.6206 0.707589 15.8862 0.400391C15.6679 0.797193 15.4253 1.33479 15.2555 1.75719C13.4108 1.47558 11.5793 1.47558 9.76006 1.75719C9.59025 1.33479 9.33554 0.797193 9.12935 0.400391C7.38287 0.707589 5.72126 1.25799 4.16761 2.01318C1.02633 6.90277 0.177327 11.6771 0.601825 16.3875C2.68793 17.9875 4.70128 18.9604 6.67944 19.6004C7.16458 18.9092 7.60121 18.1667 7.9772 17.386C7.26161 17.1044 6.58242 16.7587 5.92748 16.3491C6.09727 16.2212 6.26708 16.0804 6.42475 15.9396C10.3786 17.8468 14.6612 17.8468 18.5666 15.9396C18.7364 16.0804 18.8941 16.2212 19.0639 16.3491C18.4089 16.7587 17.7297 17.1044 17.0141 17.386C17.3901 18.1667 17.8268 18.9092 18.3119 19.6004C20.2888 18.9604 22.3143 17.9875 24.3895 16.3875C24.9109 10.9348 23.5635 6.19882 20.8468 2.01318ZM8.52297 13.482C7.33436 13.482 6.36408 12.3428 6.36408 10.9476C6.36408 9.55241 7.31011 8.41316 8.52297 8.41316C9.72367 8.41316 10.7061 9.55241 10.6818 10.9476C10.6818 12.3428 9.72367 13.482 8.52297 13.482ZM16.4926 13.482C15.304 13.482 14.3325 12.3428 14.3325 10.9476C14.3325 9.55241 15.2797 8.41316 16.4926 8.41316C17.6934 8.41316 18.6757 9.55241 18.6515 10.9476C18.6515 12.3428 17.7055 13.482 16.4926 13.482Z"
-                            fill="#878EA3"
-                          /></svg
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="12"
-                          height="24"
-                          viewBox="0 0 12 24"
-                          fill="none"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M10.7792 13.3981L11.3493 9.08738H7.7831V6.29001C7.7831 5.11069 8.28124 3.96117 9.87858 3.96117H11.5V0.291262C11.5 0.291262 10.0285 0 8.62167 0C5.68452 0 3.76484 2.06447 3.76484 5.80194V9.08738H0.5V13.3981H3.76484V23.8188C4.41949 23.938 5.09047 24 5.77397 24C6.45748 24 7.12845 23.938 7.7831 23.8188V13.3981H10.7792Z"
-                            fill="#878EA3"
-                          /></svg
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="25"
-                          height="24"
-                          viewBox="0 0 25 24"
-                          fill="none"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M12.5 5.83784C9.09671 5.83784 6.33784 8.59671 6.33784 12C6.33784 15.4033 9.09671 18.1622 12.5 18.1622C15.9033 18.1622 18.6622 15.4033 18.6622 12C18.6622 8.59671 15.9033 5.83784 12.5 5.83784ZM12.5 16C10.2908 16 8.5 14.2091 8.5 12C8.5 9.79085 10.2908 8 12.5 8C14.7091 8 16.5 9.79085 16.5 12C16.5 14.2091 14.7091 16 12.5 16Z"
-                            fill="#878EA3"
-                          />
-                          <path
-                            d="M18.9056 7.03436C19.7009 7.03436 20.3456 6.38968 20.3456 5.59438C20.3456 4.79909 19.7009 4.15436 18.9056 4.15436C18.1104 4.15436 17.4656 4.79909 17.4656 5.59438C17.4656 6.38968 18.1104 7.03436 18.9056 7.03436Z"
-                            fill="#878EA3"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M12.5 0C9.241 0 8.83234 0.0138139 7.55242 0.0722133C6.27516 0.13047 5.40283 0.333343 4.63954 0.630008C3.85044 0.936629 3.18123 1.34695 2.51406 2.01406C1.84695 2.68123 1.43663 3.35044 1.13001 4.13954C0.833343 4.90283 0.63047 5.77516 0.572213 7.05242C0.513814 8.33234 0.5 8.741 0.5 12C0.5 15.259 0.513814 15.6677 0.572213 16.9476C0.63047 18.2248 0.833343 19.0972 1.13001 19.8605C1.43663 20.6496 1.84695 21.3188 2.51406 21.9859C3.18123 22.6531 3.85044 23.0634 4.63954 23.37C5.40283 23.6667 6.27516 23.8695 7.55242 23.9278C8.83234 23.9862 9.241 24 12.5 24C15.759 24 16.1677 23.9862 17.4476 23.9278C18.7248 23.8695 19.5972 23.6667 20.3605 23.37C21.1496 23.0634 21.8188 22.6531 22.4859 21.9859C23.1531 21.3188 23.5634 20.6496 23.87 19.8605C24.1667 19.0972 24.3695 18.2248 24.4278 16.9476C24.4862 15.6677 24.5 15.259 24.5 12C24.5 8.741 24.4862 8.33234 24.4278 7.05242C24.3695 5.77516 24.1667 4.90283 23.87 4.13954C23.5634 3.35044 23.1531 2.68123 22.4859 2.01406C21.8188 1.34695 21.1496 0.936629 20.3605 0.630008C19.5972 0.333343 18.7248 0.13047 17.4476 0.0722133C16.1677 0.0138139 15.759 0 12.5 0ZM12.5 2.16216C15.7041 2.16216 16.0837 2.1744 17.349 2.23213C18.519 2.28548 19.1544 2.48097 19.5773 2.64531C20.1374 2.863 20.5371 3.12303 20.957 3.54298C21.377 3.96287 21.637 4.36261 21.8547 4.92274C22.019 5.34559 22.2145 5.98098 22.2679 7.15097C22.3256 8.41632 22.3378 8.79587 22.3378 12C22.3378 15.2041 22.3256 15.5837 22.2679 16.849C22.2145 18.019 22.019 18.6544 21.8547 19.0773C21.637 19.6374 21.377 20.0371 20.957 20.457C20.5371 20.877 20.1374 21.137 19.5773 21.3547C19.1544 21.519 18.519 21.7145 17.349 21.7679C16.0839 21.8256 15.7044 21.8378 12.5 21.8378C9.29563 21.8378 8.91618 21.8256 7.65097 21.7679C6.48098 21.7145 5.84559 21.519 5.42274 21.3547C4.86261 21.137 4.46287 20.877 4.04297 20.457C3.62308 20.0371 3.363 19.6374 3.14531 19.0773C2.98097 18.6544 2.78548 18.019 2.73213 16.849C2.6744 15.5837 2.66216 15.2041 2.66216 12C2.66216 8.79587 2.6744 8.41632 2.73213 7.15097C2.78548 5.98098 2.98097 5.34559 3.14531 4.92274C3.363 4.36261 3.62303 3.96287 4.04297 3.54298C4.46287 3.12303 4.86261 2.863 5.42274 2.64531C5.84559 2.48097 6.48098 2.28548 7.65097 2.23213C8.91632 2.1744 9.29587 2.16216 12.5 2.16216Z"
-                            fill="#878EA3"
-                          /></svg
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="25"
-                          height="24"
-                          viewBox="0 0 25 24"
-                          fill="none"
-                        >
-                          <path
-                            d="M0.5 12C0.5 17.123 3.711 21.497 8.23 23.218C8.12 22.281 8.003 20.736 8.255 19.652C8.472 18.72 9.656 13.714 9.656 13.714C9.656 13.714 9.299 12.999 9.299 11.94C9.299 10.28 10.261 9.04 11.46 9.04C12.48 9.04 12.972 9.805 12.972 10.722C12.972 11.747 12.319 13.279 11.982 14.7C11.701 15.889 12.579 16.859 13.751 16.859C15.874 16.859 17.507 14.62 17.507 11.388C17.507 8.527 15.451 6.528 12.516 6.528C9.118 6.528 7.123 9.077 7.123 11.712C7.123 12.739 7.518 13.839 8.012 14.438C8.05412 14.4832 8.08387 14.5386 8.09841 14.5986C8.11295 14.6587 8.11177 14.7215 8.095 14.781C8.004 15.159 7.802 15.97 7.763 16.136C7.71 16.354 7.59 16.401 7.363 16.295C5.871 15.601 4.939 13.42 4.939 11.668C4.939 7.899 7.676 4.439 12.831 4.439C16.975 4.439 20.196 7.392 20.196 11.338C20.196 15.455 17.601 18.769 13.997 18.769C12.786 18.769 11.649 18.139 11.259 17.396C11.259 17.396 10.66 19.678 10.515 20.236C10.233 21.32 9.451 22.692 8.966 23.471C10.084 23.815 11.27 24 12.5 24C19.127 24 24.5 18.627 24.5 12C24.5 5.373 19.127 0 12.5 0C5.873 0 0.5 5.373 0.5 12Z"
-                            fill="#878EA3"
-                          /></svg
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="25"
-                          height="24"
-                          viewBox="0 0 25 24"
-                          fill="none"
-                        >
-                          <path
-                            d="M24.4707 18.1797C24.3661 17.8279 23.8654 17.5799 23.8654 17.5799C23.8181 17.5546 23.7757 17.5318 23.7409 17.5141C22.9064 17.1042 22.1666 16.6107 21.5438 16.0515C21.0432 15.601 20.6147 15.105 20.271 14.5787C19.85 13.9359 19.6532 13.3994 19.5685 13.1084C19.5212 12.9186 19.5286 12.8427 19.5685 12.744C19.6009 12.6605 19.698 12.582 19.7429 12.5441C20.0243 12.3416 20.4777 12.043 20.7567 11.8608C20.9983 11.7014 21.2051 11.5647 21.3271 11.4787C21.7182 11.2003 21.9872 10.9169 22.1442 10.6107C22.3484 10.2159 22.3733 9.78068 22.2139 9.35302C21.9997 8.77604 21.4691 8.43189 20.7941 8.43189C20.6446 8.43189 20.4902 8.4496 20.3357 8.4825C19.9496 8.56854 19.5834 8.70772 19.2771 8.82919C19.2546 8.83931 19.2297 8.8216 19.2322 8.79629C19.2646 8.02446 19.302 6.98693 19.2173 6.00253C19.1425 5.11177 18.9607 4.36019 18.6668 3.70477C18.3703 3.04682 17.9842 2.56094 17.6828 2.20919C17.3964 1.87516 16.8907 1.3817 16.1285 0.938844C15.0574 0.316322 13.8368 0 12.5016 0C11.169 0 9.95087 0.316322 8.87726 0.938844C8.07018 1.407 7.55455 1.93589 7.3204 2.20919C7.01899 2.56094 6.63289 3.04682 6.33647 3.70477C6.04004 4.36019 5.86069 5.10924 5.78596 6.00253C5.70127 6.99199 5.73615 7.94601 5.77102 8.79629C5.77102 8.8216 5.7486 8.83931 5.72369 8.82919C5.4173 8.70772 5.05113 8.56854 4.66503 8.4825C4.51308 8.4496 4.35864 8.43189 4.20669 8.43189C3.53413 8.43189 3.00355 8.77604 2.78684 9.35302C2.62742 9.78068 2.65233 10.2159 2.85659 10.6107C3.01601 10.9169 3.28254 11.2003 3.67362 11.4787C3.79319 11.5647 4.00243 11.7014 4.24405 11.8608C4.51557 12.0405 4.95647 12.3315 5.24044 12.5314C5.27532 12.5567 5.39488 12.6478 5.43225 12.744C5.4721 12.8452 5.47958 12.9211 5.42727 13.1236C5.34008 13.4171 5.14329 13.9485 4.72979 14.5787C4.38604 15.1075 3.95759 15.601 3.45691 16.0515C2.83417 16.6107 2.09435 17.1042 1.25987 17.5141C1.22002 17.5344 1.17269 17.5571 1.12287 17.5875C1.12287 17.5875 0.624676 17.8456 0.53002 18.1797C0.390525 18.6731 0.76168 19.1362 1.13782 19.3842C1.75558 19.7891 2.50785 20.0067 2.94377 20.1257C3.06583 20.1586 3.17543 20.189 3.27507 20.2193C3.33734 20.2396 3.49427 20.3003 3.56153 20.3889C3.64622 20.5002 3.65619 20.6369 3.68608 20.7912C3.73341 21.0519 3.84052 21.3733 4.15687 21.596C4.50561 21.8389 4.94651 21.8566 5.50698 21.8794C6.09235 21.9022 6.81972 21.93 7.65419 22.2109C8.04029 22.3399 8.39152 22.5601 8.79506 22.8132C9.64199 23.3421 10.6957 24 12.4941 24C14.2951 24 15.3563 23.3395 16.2082 22.8081C16.6117 22.5576 16.958 22.3399 17.3366 22.2134C18.1711 21.9325 18.8984 21.9047 19.4838 21.8819C20.0443 21.8591 20.4852 21.8439 20.8339 21.5985C21.1727 21.3606 21.2698 21.0063 21.3147 20.7406C21.3396 20.609 21.3545 20.4901 21.4293 20.3939C21.494 20.3104 21.6385 20.2522 21.7057 20.2294C21.8079 20.1965 21.9225 20.1662 22.0495 20.1307C22.4854 20.0118 23.0334 19.8726 23.6985 19.4905C24.5006 19.0274 24.5554 18.4606 24.4707 18.1797Z"
-                            fill="#878EA3"
-                          /></svg
-                      ></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="lower--footer">
-                <p>All Rights Reserved 2024.</p>
-                <p>Terms & Conditions</p>
-              </div>
-            </div>
-          </div>
-        </footer>
-        <!-- Footer Area Ends -->
-
-        <!-- cart area wrapper -->
-        {{-- <div class="cart--area--wrapper">
-          <div class="cart--area--content">
-            <div class="cart--intro--area">
-              <div class="close--cart--btn">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
-                  viewBox="0 0 40 40"
-                  fill="none"
-                >
-                  <path
-                    d="M36.6676 18.3317H7.35761L16.1793 9.51001C16.3385 9.35627 16.4654 9.17236 16.5528 8.96902C16.6401 8.76568 16.6861 8.54698 16.688 8.32568C16.69 8.10438 16.6478 7.88492 16.564 7.68009C16.4802 7.47526 16.3564 7.28917 16.1999 7.13269C16.0435 6.9762 15.8574 6.85244 15.6525 6.76864C15.4477 6.68484 15.2282 6.64267 15.0069 6.64459C14.7856 6.64652 14.5669 6.69249 14.3636 6.77984C14.1603 6.86719 13.9764 6.99416 13.8226 7.15335L2.15595 18.82C1.84349 19.1326 1.66797 19.5564 1.66797 19.9983C1.66797 20.4403 1.84349 20.8641 2.15595 21.1767L13.8226 32.8433C14.137 33.1469 14.558 33.3149 14.9949 33.3111C15.4319 33.3073 15.85 33.1321 16.159 32.823C16.468 32.514 16.6433 32.096 16.6471 31.659C16.6509 31.222 16.4829 30.801 16.1793 30.4867L7.35761 21.665H36.6676C37.1096 21.665 37.5336 21.4894 37.8461 21.1769C38.1587 20.8643 38.3343 20.4404 38.3343 19.9983C38.3343 19.5563 38.1587 19.1324 37.8461 18.8198C37.5336 18.5073 37.1096 18.3317 36.6676 18.3317Z"
-                    fill="black"
-                  />
-                </svg>
-              </div>
-
-              <h3>YOUR CART</h3>
-            </div>
-
-            <form action="#">
-              <!-- cart items -->
-              <div class="cart--items--list--wrapper">
-                <div class="single--cart--item">
-                  <div class="cart--item--img">
-                    <img src="./assets/images/cart-product.png" alt="" />
-                  </div>
-
-                  <div class="cart--item--details">
-                    <p class="item--title">ROGUE ASSASSIN: A SPARK OF REVIVAL</p>
-
-                    <p class="item--ref">Ref: 0546846</p>
-                    <p class="item--genre">GENRE: ACTION THRILLER GRAPHIC NOVEL</p>
-                  </div>
-
-                  <div class="item--amount">
-                    <div class="plus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8.98828 17.6231C8.34094 17.6231 7.81641 17.0986 7.81641 16.4513V1.54688C7.81641 0.899531 8.34094 0.375 8.98828 0.375C9.63563 0.375 10.1602 0.899531 10.1602 1.54688V16.4513C10.1602 17.0986 9.63563 17.6231 8.98828 17.6231Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M16.4395 10.1719H1.53516C0.887812 10.1719 0.363281 9.64734 0.363281 9C0.363281 8.35266 0.887812 7.82812 1.53516 7.82812H16.4395C17.0869 7.82812 17.6114 8.35266 17.6114 9C17.6114 9.64734 17.0869 10.1719 16.4395 10.1719Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-
-                    <input type="text" class="amount" readonly value="1" />
-
-                    <div class="minus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="4"
-                        viewBox="0 0 24 4"
-                        fill="none"
-                      >
-                        <path
-                          d="M1.41958 3.43907H22.5395C22.7286 3.43907 22.9159 3.40181 23.0907 3.32942C23.2654 3.25704 23.4242 3.15094 23.5579 3.01719C23.6916 2.88344 23.7977 2.72466 23.8701 2.54991C23.9424 2.37516 23.9797 2.18787 23.9796 1.99873C23.9797 1.8096 23.9424 1.62232 23.8701 1.44758C23.7977 1.27285 23.6916 1.11408 23.5579 0.980343C23.4242 0.846609 23.2654 0.74053 23.0907 0.668165C22.9159 0.595801 22.7286 0.558568 22.5395 0.558594H1.41958C1.04053 0.563027 0.678499 0.716719 0.412019 0.986333C0.14554 1.25595 -0.00390625 1.61975 -0.00390625 1.99883C-0.00390625 2.37791 0.14554 2.74171 0.412019 3.01133C0.678499 3.28094 1.04053 3.43463 1.41958 3.43907Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="cart--item--price">
-                    <p class="price">$ <span>12</span></p>
-
-                    <div class="item--close--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="14"
-                        viewBox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M1.28107 0.305288C1.4686 0.117817 1.7229 0.0125018 1.98807 0.0125018C2.25323 0.0125018 2.50754 0.117817 2.69507 0.305288L7.98807 5.59829L13.2811 0.305288C13.3733 0.209778 13.4837 0.133596 13.6057 0.0811869C13.7277 0.0287779 13.8589 0.00119157 13.9917 3.77571e-05C14.1244 -0.00111606 14.2561 0.0241854 14.379 0.0744663C14.5019 0.124747 14.6136 0.199 14.7075 0.292893C14.8014 0.386786 14.8756 0.498438 14.9259 0.621334C14.9762 0.744231 15.0015 0.87591 15.0003 1.00869C14.9992 1.14147 14.9716 1.27269 14.9192 1.39469C14.8668 1.5167 14.7906 1.62704 14.6951 1.71929L9.40207 7.01229L14.6951 12.3053C14.8772 12.4939 14.978 12.7465 14.9757 13.0087C14.9735 13.2709 14.8683 13.5217 14.6829 13.7071C14.4975 13.8925 14.2467 13.9977 13.9845 14C13.7223 14.0022 13.4697 13.9014 13.2811 13.7193L7.98807 8.42629L2.69507 13.7193C2.50647 13.9014 2.25386 14.0022 1.99167 14C1.72947 13.9977 1.47866 13.8925 1.29325 13.7071C1.10784 13.5217 1.00267 13.2709 1.00039 13.0087C0.998115 12.7465 1.09891 12.4939 1.28107 12.3053L6.57407 7.01229L1.28107 1.71929C1.0936 1.53176 0.988281 1.27745 0.988281 1.01229C0.988281 0.747124 1.0936 0.492816 1.28107 0.305288Z"
-                          fill="#5A5C5F"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="single--cart--item">
-                  <div class="cart--item--img">
-                    <img src="./assets/images/cart-product.png" alt="" />
-                  </div>
-
-                  <div class="cart--item--details">
-                    <p class="item--title">ROGUE ASSASSIN: A SPARK OF REVIVAL</p>
-
-                    <p class="item--ref">Ref: 0546846</p>
-                    <p class="item--genre">GENRE: ACTION THRILLER GRAPHIC NOVEL</p>
-                  </div>
-
-                  <div class="item--amount">
-                    <div class="plus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8.98828 17.6231C8.34094 17.6231 7.81641 17.0986 7.81641 16.4513V1.54688C7.81641 0.899531 8.34094 0.375 8.98828 0.375C9.63563 0.375 10.1602 0.899531 10.1602 1.54688V16.4513C10.1602 17.0986 9.63563 17.6231 8.98828 17.6231Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M16.4395 10.1719H1.53516C0.887812 10.1719 0.363281 9.64734 0.363281 9C0.363281 8.35266 0.887812 7.82812 1.53516 7.82812H16.4395C17.0869 7.82812 17.6114 8.35266 17.6114 9C17.6114 9.64734 17.0869 10.1719 16.4395 10.1719Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-
-                    <input type="text" class="amount" readonly value="1" />
-
-                    <div class="minus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="4"
-                        viewBox="0 0 24 4"
-                        fill="none"
-                      >
-                        <path
-                          d="M1.41958 3.43907H22.5395C22.7286 3.43907 22.9159 3.40181 23.0907 3.32942C23.2654 3.25704 23.4242 3.15094 23.5579 3.01719C23.6916 2.88344 23.7977 2.72466 23.8701 2.54991C23.9424 2.37516 23.9797 2.18787 23.9796 1.99873C23.9797 1.8096 23.9424 1.62232 23.8701 1.44758C23.7977 1.27285 23.6916 1.11408 23.5579 0.980343C23.4242 0.846609 23.2654 0.74053 23.0907 0.668165C22.9159 0.595801 22.7286 0.558568 22.5395 0.558594H1.41958C1.04053 0.563027 0.678499 0.716719 0.412019 0.986333C0.14554 1.25595 -0.00390625 1.61975 -0.00390625 1.99883C-0.00390625 2.37791 0.14554 2.74171 0.412019 3.01133C0.678499 3.28094 1.04053 3.43463 1.41958 3.43907Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="cart--item--price">
-                    <p class="price">$ <span>12</span></p>
-
-                    <div class="item--close--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="14"
-                        viewBox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M1.28107 0.305288C1.4686 0.117817 1.7229 0.0125018 1.98807 0.0125018C2.25323 0.0125018 2.50754 0.117817 2.69507 0.305288L7.98807 5.59829L13.2811 0.305288C13.3733 0.209778 13.4837 0.133596 13.6057 0.0811869C13.7277 0.0287779 13.8589 0.00119157 13.9917 3.77571e-05C14.1244 -0.00111606 14.2561 0.0241854 14.379 0.0744663C14.5019 0.124747 14.6136 0.199 14.7075 0.292893C14.8014 0.386786 14.8756 0.498438 14.9259 0.621334C14.9762 0.744231 15.0015 0.87591 15.0003 1.00869C14.9992 1.14147 14.9716 1.27269 14.9192 1.39469C14.8668 1.5167 14.7906 1.62704 14.6951 1.71929L9.40207 7.01229L14.6951 12.3053C14.8772 12.4939 14.978 12.7465 14.9757 13.0087C14.9735 13.2709 14.8683 13.5217 14.6829 13.7071C14.4975 13.8925 14.2467 13.9977 13.9845 14C13.7223 14.0022 13.4697 13.9014 13.2811 13.7193L7.98807 8.42629L2.69507 13.7193C2.50647 13.9014 2.25386 14.0022 1.99167 14C1.72947 13.9977 1.47866 13.8925 1.29325 13.7071C1.10784 13.5217 1.00267 13.2709 1.00039 13.0087C0.998115 12.7465 1.09891 12.4939 1.28107 12.3053L6.57407 7.01229L1.28107 1.71929C1.0936 1.53176 0.988281 1.27745 0.988281 1.01229C0.988281 0.747124 1.0936 0.492816 1.28107 0.305288Z"
-                          fill="#5A5C5F"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="single--cart--item">
-                  <div class="cart--item--img">
-                    <img src="./assets/images/cart-product.png" alt="" />
-                  </div>
-
-                  <div class="cart--item--details">
-                    <p class="item--title">ROGUE ASSASSIN: A SPARK OF REVIVAL</p>
-
-                    <p class="item--ref">Ref: 0546846</p>
-                    <p class="item--genre">GENRE: ACTION THRILLER GRAPHIC NOVEL</p>
-                  </div>
-
-                  <div class="item--amount">
-                    <div class="plus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8.98828 17.6231C8.34094 17.6231 7.81641 17.0986 7.81641 16.4513V1.54688C7.81641 0.899531 8.34094 0.375 8.98828 0.375C9.63563 0.375 10.1602 0.899531 10.1602 1.54688V16.4513C10.1602 17.0986 9.63563 17.6231 8.98828 17.6231Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M16.4395 10.1719H1.53516C0.887812 10.1719 0.363281 9.64734 0.363281 9C0.363281 8.35266 0.887812 7.82812 1.53516 7.82812H16.4395C17.0869 7.82812 17.6114 8.35266 17.6114 9C17.6114 9.64734 17.0869 10.1719 16.4395 10.1719Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-
-                    <input type="text" class="amount" readonly value="1" />
-
-                    <div class="minus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="4"
-                        viewBox="0 0 24 4"
-                        fill="none"
-                      >
-                        <path
-                          d="M1.41958 3.43907H22.5395C22.7286 3.43907 22.9159 3.40181 23.0907 3.32942C23.2654 3.25704 23.4242 3.15094 23.5579 3.01719C23.6916 2.88344 23.7977 2.72466 23.8701 2.54991C23.9424 2.37516 23.9797 2.18787 23.9796 1.99873C23.9797 1.8096 23.9424 1.62232 23.8701 1.44758C23.7977 1.27285 23.6916 1.11408 23.5579 0.980343C23.4242 0.846609 23.2654 0.74053 23.0907 0.668165C22.9159 0.595801 22.7286 0.558568 22.5395 0.558594H1.41958C1.04053 0.563027 0.678499 0.716719 0.412019 0.986333C0.14554 1.25595 -0.00390625 1.61975 -0.00390625 1.99883C-0.00390625 2.37791 0.14554 2.74171 0.412019 3.01133C0.678499 3.28094 1.04053 3.43463 1.41958 3.43907Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="cart--item--price">
-                    <p class="price">$ <span>12</span></p>
-
-                    <div class="item--close--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="14"
-                        viewBox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M1.28107 0.305288C1.4686 0.117817 1.7229 0.0125018 1.98807 0.0125018C2.25323 0.0125018 2.50754 0.117817 2.69507 0.305288L7.98807 5.59829L13.2811 0.305288C13.3733 0.209778 13.4837 0.133596 13.6057 0.0811869C13.7277 0.0287779 13.8589 0.00119157 13.9917 3.77571e-05C14.1244 -0.00111606 14.2561 0.0241854 14.379 0.0744663C14.5019 0.124747 14.6136 0.199 14.7075 0.292893C14.8014 0.386786 14.8756 0.498438 14.9259 0.621334C14.9762 0.744231 15.0015 0.87591 15.0003 1.00869C14.9992 1.14147 14.9716 1.27269 14.9192 1.39469C14.8668 1.5167 14.7906 1.62704 14.6951 1.71929L9.40207 7.01229L14.6951 12.3053C14.8772 12.4939 14.978 12.7465 14.9757 13.0087C14.9735 13.2709 14.8683 13.5217 14.6829 13.7071C14.4975 13.8925 14.2467 13.9977 13.9845 14C13.7223 14.0022 13.4697 13.9014 13.2811 13.7193L7.98807 8.42629L2.69507 13.7193C2.50647 13.9014 2.25386 14.0022 1.99167 14C1.72947 13.9977 1.47866 13.8925 1.29325 13.7071C1.10784 13.5217 1.00267 13.2709 1.00039 13.0087C0.998115 12.7465 1.09891 12.4939 1.28107 12.3053L6.57407 7.01229L1.28107 1.71929C1.0936 1.53176 0.988281 1.27745 0.988281 1.01229C0.988281 0.747124 1.0936 0.492816 1.28107 0.305288Z"
-                          fill="#5A5C5F"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="single--cart--item">
-                  <div class="cart--item--img">
-                    <img src="./assets/images/cart-product.png" alt="" />
-                  </div>
-
-                  <div class="cart--item--details">
-                    <p class="item--title">ROGUE ASSASSIN: A SPARK OF REVIVAL</p>
-
-                    <p class="item--ref">Ref: 0546846</p>
-                    <p class="item--genre">GENRE: ACTION THRILLER GRAPHIC NOVEL</p>
-                  </div>
-
-                  <div class="item--amount">
-                    <div class="plus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8.98828 17.6231C8.34094 17.6231 7.81641 17.0986 7.81641 16.4513V1.54688C7.81641 0.899531 8.34094 0.375 8.98828 0.375C9.63563 0.375 10.1602 0.899531 10.1602 1.54688V16.4513C10.1602 17.0986 9.63563 17.6231 8.98828 17.6231Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M16.4395 10.1719H1.53516C0.887812 10.1719 0.363281 9.64734 0.363281 9C0.363281 8.35266 0.887812 7.82812 1.53516 7.82812H16.4395C17.0869 7.82812 17.6114 8.35266 17.6114 9C17.6114 9.64734 17.0869 10.1719 16.4395 10.1719Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-
-                    <input type="text" class="amount" readonly value="1" />
-
-                    <div class="minus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="4"
-                        viewBox="0 0 24 4"
-                        fill="none"
-                      >
-                        <path
-                          d="M1.41958 3.43907H22.5395C22.7286 3.43907 22.9159 3.40181 23.0907 3.32942C23.2654 3.25704 23.4242 3.15094 23.5579 3.01719C23.6916 2.88344 23.7977 2.72466 23.8701 2.54991C23.9424 2.37516 23.9797 2.18787 23.9796 1.99873C23.9797 1.8096 23.9424 1.62232 23.8701 1.44758C23.7977 1.27285 23.6916 1.11408 23.5579 0.980343C23.4242 0.846609 23.2654 0.74053 23.0907 0.668165C22.9159 0.595801 22.7286 0.558568 22.5395 0.558594H1.41958C1.04053 0.563027 0.678499 0.716719 0.412019 0.986333C0.14554 1.25595 -0.00390625 1.61975 -0.00390625 1.99883C-0.00390625 2.37791 0.14554 2.74171 0.412019 3.01133C0.678499 3.28094 1.04053 3.43463 1.41958 3.43907Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="cart--item--price">
-                    <p class="price">$ <span>12</span></p>
-
-                    <div class="item--close--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="14"
-                        viewBox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M1.28107 0.305288C1.4686 0.117817 1.7229 0.0125018 1.98807 0.0125018C2.25323 0.0125018 2.50754 0.117817 2.69507 0.305288L7.98807 5.59829L13.2811 0.305288C13.3733 0.209778 13.4837 0.133596 13.6057 0.0811869C13.7277 0.0287779 13.8589 0.00119157 13.9917 3.77571e-05C14.1244 -0.00111606 14.2561 0.0241854 14.379 0.0744663C14.5019 0.124747 14.6136 0.199 14.7075 0.292893C14.8014 0.386786 14.8756 0.498438 14.9259 0.621334C14.9762 0.744231 15.0015 0.87591 15.0003 1.00869C14.9992 1.14147 14.9716 1.27269 14.9192 1.39469C14.8668 1.5167 14.7906 1.62704 14.6951 1.71929L9.40207 7.01229L14.6951 12.3053C14.8772 12.4939 14.978 12.7465 14.9757 13.0087C14.9735 13.2709 14.8683 13.5217 14.6829 13.7071C14.4975 13.8925 14.2467 13.9977 13.9845 14C13.7223 14.0022 13.4697 13.9014 13.2811 13.7193L7.98807 8.42629L2.69507 13.7193C2.50647 13.9014 2.25386 14.0022 1.99167 14C1.72947 13.9977 1.47866 13.8925 1.29325 13.7071C1.10784 13.5217 1.00267 13.2709 1.00039 13.0087C0.998115 12.7465 1.09891 12.4939 1.28107 12.3053L6.57407 7.01229L1.28107 1.71929C1.0936 1.53176 0.988281 1.27745 0.988281 1.01229C0.988281 0.747124 1.0936 0.492816 1.28107 0.305288Z"
-                          fill="#5A5C5F"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="single--cart--item">
-                  <div class="cart--item--img">
-                    <img src="./assets/images/cart-product.png" alt="" />
-                  </div>
-
-                  <div class="cart--item--details">
-                    <p class="item--title">ROGUE ASSASSIN: A SPARK OF REVIVAL</p>
-
-                    <p class="item--ref">Ref: 0546846</p>
-                    <p class="item--genre">GENRE: ACTION THRILLER GRAPHIC NOVEL</p>
-                  </div>
-
-                  <div class="item--amount">
-                    <div class="plus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8.98828 17.6231C8.34094 17.6231 7.81641 17.0986 7.81641 16.4513V1.54688C7.81641 0.899531 8.34094 0.375 8.98828 0.375C9.63563 0.375 10.1602 0.899531 10.1602 1.54688V16.4513C10.1602 17.0986 9.63563 17.6231 8.98828 17.6231Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M16.4395 10.1719H1.53516C0.887812 10.1719 0.363281 9.64734 0.363281 9C0.363281 8.35266 0.887812 7.82812 1.53516 7.82812H16.4395C17.0869 7.82812 17.6114 8.35266 17.6114 9C17.6114 9.64734 17.0869 10.1719 16.4395 10.1719Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-
-                    <input type="text" class="amount" readonly value="1" />
-
-                    <div class="minus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="4"
-                        viewBox="0 0 24 4"
-                        fill="none"
-                      >
-                        <path
-                          d="M1.41958 3.43907H22.5395C22.7286 3.43907 22.9159 3.40181 23.0907 3.32942C23.2654 3.25704 23.4242 3.15094 23.5579 3.01719C23.6916 2.88344 23.7977 2.72466 23.8701 2.54991C23.9424 2.37516 23.9797 2.18787 23.9796 1.99873C23.9797 1.8096 23.9424 1.62232 23.8701 1.44758C23.7977 1.27285 23.6916 1.11408 23.5579 0.980343C23.4242 0.846609 23.2654 0.74053 23.0907 0.668165C22.9159 0.595801 22.7286 0.558568 22.5395 0.558594H1.41958C1.04053 0.563027 0.678499 0.716719 0.412019 0.986333C0.14554 1.25595 -0.00390625 1.61975 -0.00390625 1.99883C-0.00390625 2.37791 0.14554 2.74171 0.412019 3.01133C0.678499 3.28094 1.04053 3.43463 1.41958 3.43907Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="cart--item--price">
-                    <p class="price">$ <span>12</span></p>
-
-                    <div class="item--close--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="14"
-                        viewBox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M1.28107 0.305288C1.4686 0.117817 1.7229 0.0125018 1.98807 0.0125018C2.25323 0.0125018 2.50754 0.117817 2.69507 0.305288L7.98807 5.59829L13.2811 0.305288C13.3733 0.209778 13.4837 0.133596 13.6057 0.0811869C13.7277 0.0287779 13.8589 0.00119157 13.9917 3.77571e-05C14.1244 -0.00111606 14.2561 0.0241854 14.379 0.0744663C14.5019 0.124747 14.6136 0.199 14.7075 0.292893C14.8014 0.386786 14.8756 0.498438 14.9259 0.621334C14.9762 0.744231 15.0015 0.87591 15.0003 1.00869C14.9992 1.14147 14.9716 1.27269 14.9192 1.39469C14.8668 1.5167 14.7906 1.62704 14.6951 1.71929L9.40207 7.01229L14.6951 12.3053C14.8772 12.4939 14.978 12.7465 14.9757 13.0087C14.9735 13.2709 14.8683 13.5217 14.6829 13.7071C14.4975 13.8925 14.2467 13.9977 13.9845 14C13.7223 14.0022 13.4697 13.9014 13.2811 13.7193L7.98807 8.42629L2.69507 13.7193C2.50647 13.9014 2.25386 14.0022 1.99167 14C1.72947 13.9977 1.47866 13.8925 1.29325 13.7071C1.10784 13.5217 1.00267 13.2709 1.00039 13.0087C0.998115 12.7465 1.09891 12.4939 1.28107 12.3053L6.57407 7.01229L1.28107 1.71929C1.0936 1.53176 0.988281 1.27745 0.988281 1.01229C0.988281 0.747124 1.0936 0.492816 1.28107 0.305288Z"
-                          fill="#5A5C5F"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="single--cart--item">
-                  <div class="cart--item--img">
-                    <img src="./assets/images/cart-product.png" alt="" />
-                  </div>
-
-                  <div class="cart--item--details">
-                    <p class="item--title">ROGUE ASSASSIN: A SPARK OF REVIVAL</p>
-
-                    <p class="item--ref">Ref: 0546846</p>
-                    <p class="item--genre">GENRE: ACTION THRILLER GRAPHIC NOVEL</p>
-                  </div>
-
-                  <div class="item--amount">
-                    <div class="plus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M8.98828 17.6231C8.34094 17.6231 7.81641 17.0986 7.81641 16.4513V1.54688C7.81641 0.899531 8.34094 0.375 8.98828 0.375C9.63563 0.375 10.1602 0.899531 10.1602 1.54688V16.4513C10.1602 17.0986 9.63563 17.6231 8.98828 17.6231Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M16.4395 10.1719H1.53516C0.887812 10.1719 0.363281 9.64734 0.363281 9C0.363281 8.35266 0.887812 7.82812 1.53516 7.82812H16.4395C17.0869 7.82812 17.6114 8.35266 17.6114 9C17.6114 9.64734 17.0869 10.1719 16.4395 10.1719Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-
-                    <input type="text" class="amount" readonly value="1" />
-
-                    <div class="minus action--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="4"
-                        viewBox="0 0 24 4"
-                        fill="none"
-                      >
-                        <path
-                          d="M1.41958 3.43907H22.5395C22.7286 3.43907 22.9159 3.40181 23.0907 3.32942C23.2654 3.25704 23.4242 3.15094 23.5579 3.01719C23.6916 2.88344 23.7977 2.72466 23.8701 2.54991C23.9424 2.37516 23.9797 2.18787 23.9796 1.99873C23.9797 1.8096 23.9424 1.62232 23.8701 1.44758C23.7977 1.27285 23.6916 1.11408 23.5579 0.980343C23.4242 0.846609 23.2654 0.74053 23.0907 0.668165C22.9159 0.595801 22.7286 0.558568 22.5395 0.558594H1.41958C1.04053 0.563027 0.678499 0.716719 0.412019 0.986333C0.14554 1.25595 -0.00390625 1.61975 -0.00390625 1.99883C-0.00390625 2.37791 0.14554 2.74171 0.412019 3.01133C0.678499 3.28094 1.04053 3.43463 1.41958 3.43907Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="cart--item--price">
-                    <p class="price">$ <span>12</span></p>
-
-                    <div class="item--close--btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="14"
-                        viewBox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M1.28107 0.305288C1.4686 0.117817 1.7229 0.0125018 1.98807 0.0125018C2.25323 0.0125018 2.50754 0.117817 2.69507 0.305288L7.98807 5.59829L13.2811 0.305288C13.3733 0.209778 13.4837 0.133596 13.6057 0.0811869C13.7277 0.0287779 13.8589 0.00119157 13.9917 3.77571e-05C14.1244 -0.00111606 14.2561 0.0241854 14.379 0.0744663C14.5019 0.124747 14.6136 0.199 14.7075 0.292893C14.8014 0.386786 14.8756 0.498438 14.9259 0.621334C14.9762 0.744231 15.0015 0.87591 15.0003 1.00869C14.9992 1.14147 14.9716 1.27269 14.9192 1.39469C14.8668 1.5167 14.7906 1.62704 14.6951 1.71929L9.40207 7.01229L14.6951 12.3053C14.8772 12.4939 14.978 12.7465 14.9757 13.0087C14.9735 13.2709 14.8683 13.5217 14.6829 13.7071C14.4975 13.8925 14.2467 13.9977 13.9845 14C13.7223 14.0022 13.4697 13.9014 13.2811 13.7193L7.98807 8.42629L2.69507 13.7193C2.50647 13.9014 2.25386 14.0022 1.99167 14C1.72947 13.9977 1.47866 13.8925 1.29325 13.7071C1.10784 13.5217 1.00267 13.2709 1.00039 13.0087C0.998115 12.7465 1.09891 12.4939 1.28107 12.3053L6.57407 7.01229L1.28107 1.71929C1.0936 1.53176 0.988281 1.27745 0.988281 1.01229C0.988281 0.747124 1.0936 0.492816 1.28107 0.305288Z"
-                          fill="#5A5C5F"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- checkout btn -->
-              <button class="checkout--btn">CHECK-OUT</button>
-            </form>
-          </div>
-        </div> --}}
-        <!-- cart area wrapper -->
-
-
-
+        </div>
+    </footer>
+    <!-- end footer  -->
 @endsection
