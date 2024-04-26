@@ -479,7 +479,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -579,7 +579,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                             <p class="available">Available Now</p>
                                         </div>
@@ -680,7 +680,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -780,7 +780,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -880,7 +880,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                             <p class="available">Available Now</p>
                                         </div>
@@ -981,7 +981,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1086,7 +1086,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1186,7 +1186,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                             <p class="available">Available Now</p>
                                         </div>
@@ -1287,7 +1287,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1387,7 +1387,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1487,7 +1487,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                             <p class="available">Available Now</p>
                                         </div>
@@ -1588,7 +1588,7 @@
                                             </ul>
                                             <div class="pricing">
                                                 <p>$20<span>/Per day</span></p>
-                                                <a href="view-details.html" class="button">Rent Car</a>
+                                                <a href="{{ route('view-details.index') }}" class="button">Rent Car</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1605,7 +1605,7 @@
         </section>
         <!-- inventory area end  -->
         <!-- steps area start  -->
-        <section class="steps--area" style="background-image: url({{ asset('frontend/images/steps-bg.png')}});">
+        <section class="steps--area" style="background-image: url({{ asset('frontend/images/steps-bg.png') }});">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

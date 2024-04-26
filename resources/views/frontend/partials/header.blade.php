@@ -9,25 +9,26 @@
             </div>
             <div class="col-9">
                 <div class="menu--wrapper">
-                    <!-- menu  -->
                     <ul class="menu">
                         <li>
-                            <a href="index.html" class="active">Home</a>
+                            <a href="{{ route('home.index') }}" class="{{ request()->route()->getName() === 'home.index' ? 'active' : '' }}">Home</a>
                         </li>
                         <li>
-                            <a href="listing.html">Car Listing</a>
+                            <a href="{{ route('car-listing.index') }}" class="{{ request()->route()->getName() === 'car-listing.index' ? 'active' : '' }}">Car Listing</a>
                         </li>
                         <li>
-                            <a href="about.html">About Us</a>
+                            <a href="{{ route('about-us.index') }}" class="{{ request()->route()->getName() === 'about-us.index' ? 'active' : '' }}">About Us</a>
                         </li>
                         <li>
-                            <a href="faq.html">FAQs</a>
+                            <a href="{{ route('faq.index') }}" class="{{ request()->route()->getName() === 'faq.index' ? 'active' : '' }}">FAQs</a>
                         </li>
                     </ul>
+                    
+                    
                     <!-- button area  -->
                     <div class="btn--area d-flex align-items-center gap-3">
-                        <a href="login.html" class="button">Log In</a>
-                        <a href="register.html" class="buttonv2">Register</a>
+                        <a href="{{route('login')}}" class="button">Log In</a>
+                        <a href="{{route('register')}}" class="buttonv2">Register</a>
                     </div>
                 </div>
                 <!-- hamburger menu  -->
