@@ -41,11 +41,9 @@ class RouteServiceProvider extends ServiceProvider {
             Route::middleware(['web', 'auth'])
                 ->prefix('admin')
                 ->group(base_path('routes/backend.php'));
-
-            Route::middleware(['web', 'auth'])
-                ->prefix('admin')
-                ->group(base_path('routes/shadhin.php'));
-
+ 
+            Route::middleware(['web'])
+                ->group(base_path('routes/tanvir_frontend.php'));    
         });
     }
 }
