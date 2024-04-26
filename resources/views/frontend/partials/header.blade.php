@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col-3">
                 <!-- logo  -->
-                <a href="index.html" class="logo">
+                <a href="{{ route('home.index') }}" class="logo">
                     <img src="{{ asset('frontend/images/logo.svg') }}" alt="">
                 </a>
             </div>

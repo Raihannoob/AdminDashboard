@@ -3,7 +3,7 @@
         <div class="footer--row">
             <!-- footer--box  -->
             <div class="footer--box logo--box">
-                <a href="index.html">
+                <a href="{{ route('home.index') }}">
                     <img src="{{ asset('frontend/images/logo.svg') }}" alt="">
                 </a>
                 <p>Our goal is to provide a wide selection of quality cars that are budget friendly.</p>
@@ -55,9 +55,9 @@
                         <a href="mailto:youremail@gmail.com">youremail@gmail.com</a>
                     </li>
                     <li>
-                       <p>
-                        Feel free! Ask us anything related to our service
-                       </p>
+                        <p>
+                            Feel free! Ask us anything related to our service
+                        </p>
                     </li>
                 </ul>
             </div>
