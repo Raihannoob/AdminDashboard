@@ -33,8 +33,8 @@ Route::controller(AboutUsPageController::class)->name('about-us.')->group(functi
     Route::get('/about-us', 'index')->name('index');
 });
 
-Route::controller(FaqPageController::class)->name('faq.')->group(function () {
-    Route::get('/faq', 'index')->name('index');
+Route::controller(FaqPageController::class)->name('faq-page.')->group(function () {
+    Route::get('/faq-page', 'index')->name('index');
 });
 
 Route::controller(ViewDetailPageController::class)->name('view-details.')->group(function () {

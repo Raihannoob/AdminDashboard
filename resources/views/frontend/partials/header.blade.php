@@ -20,7 +20,7 @@
                             <a href="{{ route('about-us.index') }}" class="{{ request()->route()->getName() === 'about-us.index' ? 'active' : '' }}">About Us</a>
                         </li>
                         <li>
-                            <a href="{{ route('faq.index') }}" class="{{ request()->route()->getName() === 'faq.index' ? 'active' : '' }}">FAQs</a>
+                            <a href="{{ route('faq-page.index') }}" class="{{ request()->route()->getName() === 'faq.index' ? 'active' : '' }}">FAQs</a>
                         </li>
                     </ul>
                     

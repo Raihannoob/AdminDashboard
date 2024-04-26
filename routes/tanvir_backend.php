@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-
 //route for ProductPromotionsController
 Route::controller(ProductPromotionsController::class)->prefix('product-promotions')->name('product.promotion.')->group(function () {
     Route::get('/', 'index')->name('index');
@@ -27,8 +26,9 @@ Route::controller(ProductPromotionsController::class)->prefix('product-promotion
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/status/{id}', 'status')->name('status');
-});Route::controller(FAQController::class)->group(function () {
-    Route::get('/faq/', 'index')->name('faq.index');
+});
+Route::controller(FAQController::class)->group(function () {
+    Route::get('/faq', 'index')->name('faq.index');
     Route::get('/faq/create', 'create')->name('faq.create');
     Route::post('/faq/store', 'store')->name('faq.store');
     Route::get('/faq/edit/{id}', 'edit')->name('faq.edit');

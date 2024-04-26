@@ -15,4 +15,5 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/helper.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/style.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/responsive.css')}}">
+@stack('css')
 </head>
