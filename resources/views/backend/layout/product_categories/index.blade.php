@@ -19,25 +19,60 @@
                         <p class="card-description">Setup your FAQ, please provide your<code>provide your valid data</code>.
                         </p>
                         <div style="display: flex;justify-content: end;">
-                            <a href="{{ route('productcategory.create') }}" class="btn btn-primary">Add Category</a>
+                            {{-- <a href="{{ route('productcategory.create') }}" class="btn btn-primary">Add Category</a> --}}
+                            <a href="jvascript:void(0)" class="btn btn-outline-primary" id="addServiceItem">Add Category</a>
                         </div>
                         <div class="table-responsive mt-4 p-4">
                             <table class="table table-hover" id="data-table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Category Type</th>
-                                        <th>Category Image</th>
+                                        <th>Tittle</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+         <!-- Create Modal -->
+        <div class="modal fade" id="CatagoryItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="#" method="POST" id="CatagoryItemForm">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-3" id="exampleModalLabel" style="font-size: 1.19rem;">Catagory
+                                Item</h1>
+                            <button type="button" class="btn btn-inverse-danger " data-dismiss="modal"
+                                aria-label="Close">X</button>
+                        </div>
+                        <div class="modal-body">
+                            @csrf
+                            <input type="hidden" name="id" id="CatagoryItemID" readonly>
+                            <div class="mb-3">
+                                <label for="title" class="col-form-label">Title</label>
+                                <div>
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                        id="title" placeholder="Please enter your title" name="title" value="">
+                                    @error('title')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-inverse-danger " data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-inverse-success">Save changes</button>
+                            </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -94,18 +129,11 @@
                             searchable: false
                         },
                         {
-                            data: 'category_type',
-                            name: 'category_type',
+                            data: 'title',
+                            name: 'title',
                             orderable: true,
                             searchable: true
                         },
-                        {
-                            data: 'category_image',
-                            name: 'category_image',
-                            orderable: true,
-                            searchable: true
-                        },
-
                         {
                             data: 'status',
                             name: 'status',
@@ -218,6 +246,94 @@
                 }, // success end
                 error: function(error) {
                     // location.reload();
+                } // Error
+            })
+        }
+    </script>
+     {{-- Store Data --}}
+     <script>
+        $(document).ready(function() {
+            $('#addServiceItem').on('click', function() {
+                // Clear input fields
+                $('#CatagoryItemID').val('');
+                $('#title').val('');
+                $('#service_type').val('').prop('selected', true);
+                $('#CatagoryItemModal').modal('show');
+            });
+            $('#CatagoryItemModal').on('hidden.bs.modal', function() {
+                // Set the default value of the select dropdown to "Select Type"
+                $('#service_type').val('').prop('selected', true);
+            });
+        });
+
+        $('#CatagoryItemForm').on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: "{{ route('productcategory.store') }}",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(resp) {
+                    console.log(resp.success);
+                    if (resp.success == true) {
+                        $('#data-table').DataTable().ajax.reload();
+                        $('#CatagoryItemModal').modal('hide');
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: resp.message
+                        });
+                    } else {
+
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        })
+    </script>
+
+    {{-- Update Modal Open --}}
+    <script>
+        function showEditForm(id) {
+            var url = '{{ route('productcategory.edit', ':id') }}';
+            console.log(url);
+            $.ajax({
+                type: "GET",
+                url: url.replace(':id', id),
+                success: function(resp) {
+                    console.log(resp);
+                    // Reloade DataTable
+                    $('#data-table').DataTable().ajax.reload();
+                    if (resp.success === true) {
+                        // show toast message
+
+                        $("#CatagoryItemID").val(resp.data.id);
+                        $("#title").val(resp.data.title);
+                        $('#CatagoryItemModal').modal('show');
+                    } else if (resp.errors) {
+
+                    } else {
+
+                    }
+                }, // success end
+                error: function(error) {
+                    location.reload();
                 } // Error
             })
         }

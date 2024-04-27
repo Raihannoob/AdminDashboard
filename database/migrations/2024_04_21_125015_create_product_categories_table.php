@@ -11,8 +11,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('category_type')->nullable();
-            $table->string('category_image')->nullable();
+            $table->string('title')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active')->nullable();
             $table->timestamps();
             $table->softDeletes();

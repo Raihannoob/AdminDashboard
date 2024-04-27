@@ -11,8 +11,7 @@ class ProductCategory extends Model {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'category_type',
-        'category_image',
+        'title',
         'status',
     ];
 
