@@ -39,7 +39,7 @@ Route::controller(FAQController::class)->group(function () {
 });
 
 Route::controller(HappyUserController::class)->group(function () {
-    Route::get('/happyuser/', 'index')->name('happyuser.index');
+    Route::get('/happyuser', 'index')->name('happyuser.index');
     Route::get('/happyuser/create', 'create')->name('happyuser.create');
     Route::post('/happyuser/store', 'store')->name('happyuser.store');
     Route::get('/happyuser/edit/{id}', 'edit')->name('happyuser.edit');

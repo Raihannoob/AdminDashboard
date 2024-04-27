@@ -29,11 +29,6 @@ class HappyUserController extends Controller {
             $data = HappyUser::latest();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('description', function ($data) {
-                    $description      = $data->description;
-                    $shortDescription = strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
-                    return '<p>' . $shortDescription . '</p>';
-                })
                 ->addColumn('image', function ($data) {
                     $url = asset($data->image);
                     return '<img src="' . $url . '" alt="image" width="50px" height="50px">';
@@ -58,7 +53,7 @@ class HappyUserController extends Controller {
                             </a>
                             </div>';
                 })
-                ->rawColumns(['description', 'image', 'status', 'action'])
+                ->rawColumns(['image', 'status', 'action'])
                 ->make();
         }
         return view('backend.layout.happy_users.index');
@@ -81,9 +76,9 @@ class HappyUserController extends Controller {
      */
     public function store(Request $request): RedirectResponse {
         $validator = Validator::make($request->all(), [
-            'rating'      => 'required|numeric',
+            'author_name'      => 'required|string',
             'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-            'short_title' => 'required|string',
+            'author_type' => 'required|string',
             'description' => 'required|string',
         ]);
 
@@ -93,8 +88,8 @@ class HappyUserController extends Controller {
 
         try {
             $happyuser              = new HappyUser();
-            $happyuser->rating      = $request->rating;
-            $happyuser->short_title = $request->short_title;
+            $happyuser->author_name      = $request->author_name;
+            $happyuser->author_type = $request->author_type;
             $happyuser->description = $request->description;
 
             $randomString     = (string) Str::uuid();
@@ -128,9 +123,9 @@ class HappyUserController extends Controller {
      */
     public function update(Request $request, int $id): RedirectResponse {
         $validator = Validator::make($request->all(), [
-            'rating'      => 'nullable|numeric',
+            'author_name'      => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-            'short_title' => 'nullable|string',
+            'author_type' => 'nullable|string',
             'description' => 'nullable|string',
         ]);
 
@@ -140,8 +135,8 @@ class HappyUserController extends Controller {
 
         try {
             $happyuser              = HappyUser::findOrFail($id);
-            $happyuser->rating      = $request->rating;
-            $happyuser->short_title = $request->short_title;
+            $happyuser->author_name      = $request->author_name;
+            $happyuser->author_type = $request->author_type;
             $happyuser->description = $request->description;
 
             if ($request->hasFile('image')) {

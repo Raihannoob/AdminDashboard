@@ -22,10 +22,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Rating</th>
+                                        <th>Author Name</th>
+                                        <th>Author Type</th>
                                         <th>Image</th>
-                                        <th>Short Title</th>
-                                        <th>Description</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -91,26 +90,20 @@
                             searchable: false
                         },
                         {
-                            data: 'rating',
-                            name: 'rating',
+                            data: 'author_name',
+                            name: 'author_name',
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: 'author_type',
+                            name: 'author_type',
                             orderable: true,
                             searchable: true
                         },
                         {
                             data: 'image',
                             name: 'image',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'short_title',
-                            name: 'short_title',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'description',
-                            name: 'description',
                             orderable: true,
                             searchable: true
                         },

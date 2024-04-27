@@ -26,24 +26,24 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label for="rating">Rating:</label>
-                                    <input type="number" step="0.5" min="0" max="5"
-                                        class="form-control form-control-md border-left-0 @error('rating') is-invalid @enderror"
-                                        placeholder="Please enter your rating" name="rating" id="rating"
-                                        value="{{ old('rating', $happyuser->rating) }}">
-                                    @error('rating')
+                                    <label for="author_name">Author Name:</label>
+                                    <input type="text" 
+                                        class="form-control form-control-md border-left-0 @error('author_name') is-invalid @enderror"
+                                        placeholder="Please enter your author name" name="author_name" id="author_name"
+                                        value="{{ old('author_name', $happyuser->author_name) }}">
+                                    @error('author_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="short_title">Short Title:</label>
+                                    <label for="author_type">Author Type:</label>
                                     <input type="text"
-                                        class="form-control form-control-md border-left-0 @error('short_title') is-invalid @enderror"
-                                        placeholder="Please enter your short_title" name="short_title" id="short_title"
-                                        value="{{ old('short_title', $happyuser->short_title) }}">
-                                    @error('short_title')
+                                        class="form-control form-control-md border-left-0 @error('author_type') is-invalid @enderror"
+                                        placeholder="Please enter your author type" name="author_type" id="author_type"
+                                        value="{{ old('author_type', $happyuser->author_type) }}">
+                                    @error('author_type')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

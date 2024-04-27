@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('happy_users', function (Blueprint $table) {
             $table->id();
-            $table->float('rating')->nullable();
+            $table->string('author_name')->nullable();
             $table->string('image')->nullable();
-            $table->string('short_title')->nullable();
+            $table->string('author_type')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active')->nullable();
             $table->timestamps();

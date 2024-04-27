@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class HappyUser extends Model {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['rating', 'image', 'short_title', 'description', 'status'];
+    protected $fillable = ['author_name', 'image', 'author_type', 'description', 'status'];
 }
