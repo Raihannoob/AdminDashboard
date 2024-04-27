@@ -1,7 +1,7 @@
 @extends('backend.app')
 
 @section('title')
-    Product Category
+    Category
 @endsection
 
 @push('style')
@@ -15,7 +15,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Frequently Asked Questions & Answer</h4>
+                        <h4 class="card-title">Categories</h4>
                         <p class="card-description">Setup your FAQ, please provide your<code>provide your valid data</code>.
                         </p>
                         <div style="display: flex;justify-content: end;">
@@ -40,15 +40,17 @@
                 </div>
             </div>
         </div>
-         <!-- Create Modal -->
-        <div class="modal fade" id="CatagoryItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+        <!-- Create Modal -->
+        <div class="modal fade" id="CatagoryItemModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="#" method="POST" id="CatagoryItemForm">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-3" id="exampleModalLabel" style="font-size: 1.19rem;">Catagory
-                                Item</h1>
-                            <button type="button" class="btn btn-inverse-danger " data-dismiss="modal"
+                            <h1 class="modal-title fs-3" id="exampleModalLabel" style="font-size: 1.19rem;">Category Item
+                            </h1>
+                            <button type="button" class="btn btn-inverse-danger" onclick="closeModal()"
                                 aria-label="Close">X</button>
                         </div>
                         <div class="modal-body">
@@ -66,16 +68,17 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div> <!-- Close modal-body here -->
 
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-inverse-danger " data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-inverse-success">Save changes</button>
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-inverse-danger" onclick="closeModal()">Close</button>
+                            <button type="submit" class="btn btn-inverse-success">Save changes</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
 
@@ -250,19 +253,14 @@
             })
         }
     </script>
-     {{-- Store Data --}}
-     <script>
+    {{-- Store Data --}}
+    <script>
         $(document).ready(function() {
             $('#addServiceItem').on('click', function() {
                 // Clear input fields
                 $('#CatagoryItemID').val('');
                 $('#title').val('');
-                $('#service_type').val('').prop('selected', true);
                 $('#CatagoryItemModal').modal('show');
-            });
-            $('#CatagoryItemModal').on('hidden.bs.modal', function() {
-                // Set the default value of the select dropdown to "Select Type"
-                $('#service_type').val('').prop('selected', true);
             });
         });
 
@@ -337,5 +335,11 @@
                 } // Error
             })
         }
+    </script>
+    {{-- close modal function --}}
+    <script>
+         function closeModal() {
+        $('#CatagoryItemModal').modal('hide');
+    }
     </script>
 @endpush
