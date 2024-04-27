@@ -66,6 +66,17 @@
                 <span class="menu-title">Happy Users</span>
             </a>
         </li>
+
+         {{--Home Page Settings  --}}
+        <li class="nav-item nav-category">Page Settings</li>
+
+        <li class="nav-item {{ isActiveRoute(['homesetting.index']) }}">
+            <a class="nav-link" href="{{ route('homesetting.index') }}">
+                <i class="bi bi-house-door menu-icon"></i>
+                <span class="menu-title">Home</span>
+            </a>
+        </li>
+
         {{-- Settings  --}}
         <li class="nav-item nav-category">Settings</li>
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\HappyUserController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductPromotionsController;
+use App\Http\Controllers\Backend\HomePage\HomePageSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,3 +67,11 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/product/status/{id}', 'status')->name('product.status');
     Route::delete('/product/destroy/{id}', 'destroy')->name('product.destroy');
 });
+
+  //Home Page settings Route
+  Route::controller(HomePageSettingController::class)->prefix('home-page-setting')->name('homesetting.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/update', 'update')->name('update');
+    // Route::get('/delete/{id}', 'destroy')->name('delete');
+    
+}); 
