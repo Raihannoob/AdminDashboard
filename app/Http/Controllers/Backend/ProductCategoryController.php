@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
-use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
-class ProductCategoryController extends Controller {
-    
-    public function index(Request $request): View | Factory | JsonResponse {
+class ProductCategoryController extends Controller
+{
+
+    public function index(Request $request): View | Factory | JsonResponse
+    {
         if ($request->ajax()) {
             $data = ProductCategory::latest();
             return DataTables::of($data)
@@ -50,82 +46,141 @@ class ProductCategoryController extends Controller {
         return view('backend.layout.product_categories.index');
     }
 
- 
-    public function create(): View | Factory {
+    public function create(): View | Factory
+    {
         return view('backend.layout.product_categories.create');
     }
 
-    public function store(Request $request) {
-       $request->validate([
-           'title'        => 'required|string',
-       ]);
-   
-       // Check if an 'id' parameter is present in the request
-       if ($request->id) {
-           
-           // Update existing ServiceItem
-           $productcategory = productcategory::findOrFail($request->id);
-           $productcategory->update([
-               'title'        => $request->title,
-           ]);
-   
-           // Return success response
-           return response()->json([
-               'success' => true,
-               'message' => "Updated Successfully",
-           ]);
-       } else {
-           
-           // Create a new ServiceItem
-           $productcategory = new productcategory();
-           $productcategory->title = $request->title;
-           $productcategory->save();
-   
-           // Return success response
-           return response()->json([
-               'success' => true,
-               'message' => "Added Successfully",
-           ]);
-       }
-   }    
-    public function edit($id) {
-        $data = productcategory::where('id', $id)->first();
-        return response()->json([
-            'success' => true,
-            'data'    => $data,
-        ]);
-    }
-
-    
-    public function status(int $id): JsonResponse {
-        $data = ProductCategory::findOrFail($id);
-
-        if ($data->status == 'active') {
-            $data->status = 'inactive';
-            $data->save();
-            return response()->json([
-                'error'   => false,
-                'message' => 'Unpublished Successfully.',
-                'data'    => $data,
+    public function store(Request $request)
+    {
+        try {
+            // Validate the request data
+            $request->validate([
+                'title' => 'required|string',
             ]);
-        } else {
-            $data->status = 'active';
-            $data->save();
+
+            // Check if an 'id' parameter is present in the request
+            if ($request->id) {
+                // Update existing product category
+                $productcategory = productcategory::findOrFail($request->id);
+                $productcategory->update([
+                    'title' => $request->title,
+                ]);
+
+                // Return success response
+                return response()->json([
+                    'success' => true,
+                    'message' => "Updated Successfully",
+                ]);
+            } else {
+                // Create a new product category
+                $productcategory = new productcategory();
+                $productcategory->title = $request->title;
+                $productcategory->save();
+
+                // Return success response
+                return response()->json([
+                    'success' => true,
+                    'message' => "Added Successfully",
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Catch any exceptions and return error response
             return response()->json([
-                'success' => true,
-                'message' => 'Published Successfully.',
-                'data'    => $data,
+                'success' => false,
+                'message' => "An error occurred: " . $e->getMessage(),
             ]);
         }
     }
 
-    
-    public function destroy(int $id): JsonResponse {
+    public function edit($id)
+    {
+        try {
+            // Retrieve data for the product category with the given ID
+            $data = productcategory::where('id', $id)->first();
+
+            // Check if data is found
+            if ($data) {
+                // Return success response with data
+                return response()->json([
+                    'success' => true,
+                    'data' => $data,
+                ]);
+            } else {
+                // Return error response if data is not found
+                return response()->json([
+                    'success' => false,
+                    'message' => "Product category not found",
+                ], 404); // HTTP status code 404 indicates "Not Found"
+            }
+        } catch (\Exception $e) {
+            // Catch any exceptions and return error response
+            return response()->json([
+                'success' => false,
+                'message' => "An error occurred: " . $e->getMessage(),
+            ], 500); // HTTP status code 500 indicates "Internal Server Error"
+        }
+    }
+
+    public function status(int $id): JsonResponse
+{
+    try {
+        // Find the product category with the given ID
+        $data = ProductCategory::findOrFail($id);
+
+        // Toggle the status between 'active' and 'inactive'
+        if ($data->status == 'active') {
+            $data->status = 'inactive';
+            $data->save();
+
+            // Return response for status change to 'inactive'
+            return response()->json([
+                'error' => false,
+                'message' => 'Unpublished Successfully.',
+                'data' => $data,
+            ]);
+        } else {
+            $data->status = 'active';
+            $data->save();
+
+            // Return response for status change to 'active'
+            return response()->json([
+                'success' => true,
+                'message' => 'Published Successfully.',
+                'data' => $data,
+            ]);
+        }
+    } catch (\Exception $e) {
+        // Catch any exceptions and return error response
+        return response()->json([
+            'success' => false,
+            'message' => "An error occurred: " . $e->getMessage(),
+        ], 500); // HTTP status code 500 indicates "Internal Server Error"
+    }
+}
+
+
+    public function destroy(int $id): JsonResponse
+{
+    try {
+        // Find the product category with the given ID
         $productcategory = ProductCategory::findOrFail($id);
+
+        // Delete the found product category
         $productcategory->delete();
+
+        // Return success response
         return response()->json([
             'success' => true,
             'message' => 'Deleted successfully.',
         ]);
+    } catch (\Exception $e) {
+        // Catch any exceptions and return error response
+        return response()->json([
+            'success' => false,
+            'message' => "An error occurred: " . $e->getMessage(),
+        ], 500); // HTTP status code 500 indicates "Internal Server Error"
     }
+}
+
 }

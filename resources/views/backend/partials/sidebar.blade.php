@@ -36,13 +36,6 @@
             </a>
         </li>
 
-        {{-- Product Category Menu --}}
-        <li class="nav-item {{ isActiveRoute(['productcategory.index']) }}">
-            <a class="nav-link" href="{{ route('productcategory.index') }}">
-                <i class="bi bi-tag menu-icon"></i>
-                <span class="menu-title">Product Category</span>
-            </a>
-        </li>
 
         {{-- Product Menu --}}
         <li class="nav-item {{ isActiveRoute(['product.index']) }}">
@@ -74,6 +67,13 @@
             <a class="nav-link" href="{{ route('homesetting.index') }}">
                 <i class="bi bi-house-door menu-icon"></i>
                 <span class="menu-title">Home</span>
+            </a>
+        </li>
+         {{--Category Menu --}}
+         <li class="nav-item {{ isActiveRoute(['productcategory.index']) }}">
+            <a class="nav-link" href="{{ route('productcategory.index') }}">
+                <i class="bi bi-tag menu-icon"></i>
+                <span class="menu-title">Category</span>
             </a>
         </li>
 
