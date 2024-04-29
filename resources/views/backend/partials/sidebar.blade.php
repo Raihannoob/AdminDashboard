@@ -60,7 +60,7 @@
             </a>
         </li>
 
-         {{--Home Page Settings  --}}
+        {{-- Home Page Settings  --}}
         <li class="nav-item nav-category">Page Settings</li>
 
         <li class="nav-item {{ isActiveRoute(['homesetting.index']) }}">
@@ -69,18 +69,32 @@
                 <span class="menu-title">Home</span>
             </a>
         </li>
-         {{--Category Menu --}}
-         <li class="nav-item {{ isActiveRoute(['productcategory.index']) }}">
+        {{-- Category Menu --}}
+        <li class="nav-item {{ isActiveRoute(['productcategory.index']) }}">
             <a class="nav-link" href="{{ route('productcategory.index') }}">
                 <i class="bi bi-tag menu-icon"></i>
                 <span class="menu-title">Category</span>
             </a>
         </li>
 
+        {{-- Car listing  Settings  --}}
+        <li class="nav-item nav-category">Car Inventory Settings</li>
+        <li class="nav-item {{ isActiveRoute(['car-amenities.index']) }}">
+            <a class="nav-link" href="{{ route('car-amenities.index') }}">
+                <i class="bi bi-card-checklist menu-icon"></i>
+                <span class="menu-title">Car Amenities</span>
+            </a>
+        </li>
+
+
+
+
+
         {{-- Settings  --}}
         <li class="nav-item nav-category">Settings</li>
 
-        <li class="nav-item {{ areActiveRoutes(['settings.system', 'settings.mail', 'settings.social-media', 'settings.dynamic-page'], 'active show') }}">
+        <li
+            class="nav-item {{ areActiveRoutes(['settings.system', 'settings.mail', 'settings.social-media', 'settings.dynamic-page'], 'active show') }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#e-commerce" aria-expanded="false"
                 aria-controls="e-commerce">
                 <i class="menu-icon bi bi-gear-fill"></i>

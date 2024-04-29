@@ -2,9 +2,10 @@
 use App\Http\Controllers\Backend\FAQController;
 use App\Http\Controllers\Backend\HappyUserController;
 use App\Http\Controllers\Backend\HomePage\HomePageSettingController;
-use App\Http\Controllers\Backend\ProductCategoryController;
+use App\Http\Controllers\Backend\HomePage\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductPromotionsController;
+use App\Http\Controllers\Backend\CarInventory\CarAmenitiesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,14 +49,12 @@ Route::controller(HappyUserController::class)->group(function () {
     Route::delete('/happyuser/destroy/{id}', 'destroy')->name('happyuser.destroy');
 });
 
-Route::controller(ProductCategoryController::class)->group(function () {
-    Route::get('/productcategory/', 'index')->name('productcategory.index');
-    Route::get('/productcategory/create', 'create')->name('productcategory.create');
-    Route::post('/productcategory/store', 'store')->name('productcategory.store');
-    Route::get('/productcategory/edit/{id}', 'edit')->name('productcategory.edit');
-    Route::put('/productcategory/update/{id}', 'update')->name('productcategory.update');
-    Route::get('/productcategory/status/{id}', 'status')->name('productcategory.status');
-    Route::delete('/productcategory/destroy/{id}', 'destroy')->name('productcategory.destroy');
+Route::controller(CategoryController::class)->prefix('productcategory')->name('productcategory.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/status/{id}', 'status')->name('status');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
 });
 
 Route::controller(ProductController::class)->group(function () {
@@ -74,4 +73,14 @@ Route::controller(HomePageSettingController::class)->prefix('home-page-setting')
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{id}', 'destroy')->name('delete');
 
+});
+
+//car Inventory settings Start
+//Car ammenities
+Route::controller(CarAmenitiesController::class)->prefix('car-amenities')->name('car-amenities.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('store', 'store')->name('store');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/status/{id}', 'status')->name('status');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
 });

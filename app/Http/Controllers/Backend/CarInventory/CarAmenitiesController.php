@@ -1,22 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
-
+namespace App\Http\Controllers\Backend\CarInventory;
+use App\Models\CarAmenities;
 use App\Http\Controllers\Controller;
-use App\Models\ProductCategory;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
-class ProductCategoryController extends Controller
+class CarAmenitiesController extends Controller
 {
-
-    public function index(Request $request): View | Factory | JsonResponse
+    public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = ProductCategory::latest();
+            $data = CarAmenities::latest();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('status', function ($data) {
@@ -43,12 +37,7 @@ class ProductCategoryController extends Controller
                 ->rawColumns(['status', 'action'])
                 ->make();
         }
-        return view('backend.layout.product_categories.index');
-    }
-
-    public function create(): View | Factory
-    {
-        return view('backend.layout.product_categories.create');
+        return view('backend.layout.car_amenities.index');
     }
 
     public function store(Request $request)
@@ -56,15 +45,18 @@ class ProductCategoryController extends Controller
         try {
             // Validate the request data
             $request->validate([
+                'type' => 'required|string',
                 'title' => 'required|string',
+                
             ]);
 
             // Check if an 'id' parameter is present in the request
             if ($request->id) {
                 // Update existing product category
-                $productcategory = productcategory::findOrFail($request->id);
-                $productcategory->update([
+                $CarAmenities = CarAmenities::findOrFail($request->id);
+                $CarAmenities->update([
                     'title' => $request->title,
+                    'type' => $request->type,
                 ]);
 
                 // Return success response
@@ -74,9 +66,10 @@ class ProductCategoryController extends Controller
                 ]);
             } else {
                 // Create a new product category
-                $productcategory = new productcategory();
-                $productcategory->title = $request->title;
-                $productcategory->save();
+                $CarAmenities = new CarAmenities();
+                $CarAmenities->title = $request->title;
+                $CarAmenities->type = $request->type;
+                $CarAmenities->save();
 
                 // Return success response
                 return response()->json([
@@ -93,11 +86,14 @@ class ProductCategoryController extends Controller
         }
     }
 
+
+
+
     public function edit($id)
     {
         try {
             // Retrieve data for the product category with the given ID
-            $data = productcategory::where('id', $id)->first();
+            $data = CarAmenities::where('id', $id)->first();
 
             // Check if data is found
             if ($data) {
@@ -122,65 +118,65 @@ class ProductCategoryController extends Controller
         }
     }
 
-    public function status(int $id): JsonResponse
-{
-    try {
-        // Find the product category with the given ID
-        $data = ProductCategory::findOrFail($id);
 
-        // Toggle the status between 'active' and 'inactive'
-        if ($data->status == 'active') {
-            $data->status = 'inactive';
-            $data->save();
-
-            // Return response for status change to 'inactive'
+    public function status(int $id)
+    {
+        try {
+            // Find the product category with the given ID
+            $data = CarAmenities::findOrFail($id);
+    
+            // Toggle the status between 'active' and 'inactive'
+            if ($data->status == 'active') {
+                $data->status = 'inactive';
+                $data->save();
+    
+                // Return response for status change to 'inactive'
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Unpublished Successfully.',
+                    'data' => $data,
+                ]);
+            } else {
+                $data->status = 'active';
+                $data->save();
+    
+                // Return response for status change to 'active'
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Published Successfully.',
+                    'data' => $data,
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Catch any exceptions and return error response
             return response()->json([
-                'error' => false,
-                'message' => 'Unpublished Successfully.',
-                'data' => $data,
-            ]);
-        } else {
-            $data->status = 'active';
-            $data->save();
-
-            // Return response for status change to 'active'
+                'success' => false,
+                'message' => "An error occurred: " . $e->getMessage(),
+            ], 500); // HTTP status code 500 indicates "Internal Server Error"
+        }
+    }
+    
+    
+        public function destroy(int $id)
+    {
+        try {
+            // Find the product category with the given ID
+            $CarAmenities = CarAmenities::findOrFail($id);
+    
+            // Delete the found product category
+            $CarAmenities->delete();
+    
+            // Return success response
             return response()->json([
                 'success' => true,
-                'message' => 'Published Successfully.',
-                'data' => $data,
+                'message' => 'Deleted successfully.',
             ]);
+        } catch (\Exception $e) {
+            // Catch any exceptions and return error response
+            return response()->json([
+                'success' => false,
+                'message' => "An error occurred: " . $e->getMessage(),
+            ], 500); // HTTP status code 500 indicates "Internal Server Error"
         }
-    } catch (\Exception $e) {
-        // Catch any exceptions and return error response
-        return response()->json([
-            'success' => false,
-            'message' => "An error occurred: " . $e->getMessage(),
-        ], 500); // HTTP status code 500 indicates "Internal Server Error"
     }
-}
-
-
-    public function destroy(int $id): JsonResponse
-{
-    try {
-        // Find the product category with the given ID
-        $productcategory = ProductCategory::findOrFail($id);
-
-        // Delete the found product category
-        $productcategory->delete();
-
-        // Return success response
-        return response()->json([
-            'success' => true,
-            'message' => 'Deleted successfully.',
-        ]);
-    } catch (\Exception $e) {
-        // Catch any exceptions and return error response
-        return response()->json([
-            'success' => false,
-            'message' => "An error occurred: " . $e->getMessage(),
-        ], 500); // HTTP status code 500 indicates "Internal Server Error"
-    }
-}
-
 }
