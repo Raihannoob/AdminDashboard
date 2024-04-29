@@ -1,7 +1,7 @@
 @extends('backend.app')
 
 @section('title')
-    Car Amenities
+    Car Locations 
 @endsection
 
 @push('style')
@@ -15,13 +15,12 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Car Amenities</h4>
+                        <h4 class="card-title">Car Locations</h4>
                         <p class="card-description">Setup your FAQ, please provide your<code>provide your valid data</code>.
                         </p>
                         <div style="display: flex;justify-content: end;">
                             {{-- <a href="{{ route('productcategory.create') }}" class="btn btn-primary">Add Category</a> --}}
-                            <a href="jvascript:void(0)" class="btn btn-outline-primary" id="addServiceItem">Add
-                                Amenities</a>
+                            <a href="jvascript:void(0)" class="btn btn-outline-primary" id="addServiceItem">Add Locations </a>
                         </div>
                         <div class="table-responsive mt-4 p-4">
                             <table class="table table-hover" id="data-table">
@@ -29,7 +28,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Type</th>
-                                        <th>Tittle</th>
+                                        <th>Location</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -50,7 +49,7 @@
                 <div class="modal-content">
                     <form action="#" method="POST" id="CatagoryItemForm">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-3" id="exampleModalLabel" style="font-size: 1.19rem;">Car Amenities
+                            <h1 class="modal-title fs-3" id="exampleModalLabel" style="font-size: 1.19rem;">Car Locations
                             </h1>
                             <button type="button" class="btn btn-inverse-danger" onclick="closeModal()"
                                 aria-label="Close">X</button>
@@ -64,8 +63,8 @@
                                     <select class="form-control @error('type') is-invalid @enderror"
                                         name="type" id="type" required>
                                         <option class="dropdown-item" value="" disabled selected>Select Type</option>
-                                        <option class="dropdown-item" value="included">Included</option>
-                                        <option class="dropdown-item" value="not_included">Not Included</option>
+                                        <option class="dropdown-item" value="pick_up">Pick Up</option>
+                                        <option class="dropdown-item" value="drop_off">Drop Off</option>
                                     </select>
                                     @error('type')
                                         <span class="invalid-feedback" role="alert">
@@ -75,11 +74,11 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="col-form-label">Title</label>
+                                <label for="location" class="col-form-label">Location Name</label>
                                 <div>
-                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                        id="title" placeholder="Please enter your title" name="title" value="" required>
-                                    @error('title')
+                                    <input type="text" class="form-control @error('location') is-invalid @enderror"
+                                        id="location" placeholder="Please enter your location" name="location" value="" required>
+                                    @error('location')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -140,7 +139,7 @@
                     pagingType: "full_numbers",
                     dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'l><'col-md-2 col-sm-4 px-0'f>>tipr",
                     ajax: {
-                        url: "{{ route('car-amenities.index') }}",
+                        url: "{{ route('car-location.index') }}",
                         type: "get",
                     },
 
@@ -157,8 +156,8 @@
                             searchable: true
                         },
                         {
-                            data: 'title',
-                            name: 'title',
+                            data: 'location',
+                            name: 'location',
                             orderable: true,
                             searchable: true
                         },
@@ -206,7 +205,7 @@
 
         // Status Change
         function statusChange(id) {
-            let url = '{{ route('car-amenities.status', ':id') }}';
+            let url = '{{ route('car-location.status', ':id') }}';
             $.ajax({
                 type: "GET",
                 url: url.replace(':id', id),
@@ -250,7 +249,7 @@
 
         // Delete Button
         function deleteItem(id) {
-            let url = '{{ route('car-amenities.destroy', ':id') }}';
+            let url = '{{ route('car-location.destroy', ':id') }}';
             let csrfToken = '{{ csrf_token() }}';
             $.ajax({
                 type: "DELETE",
@@ -285,7 +284,7 @@
                 // Clear input fields
                 $('#CatagoryItemID').val('');
                 $('#type').val('').prop('selected', true);
-                $('#title').val('');
+                $('#location').val('');
                 $('#CatagoryItemModal').modal('show');
             });
             $('#CatagoryItemModal').on('hidden.bs.modal', function() {
@@ -299,7 +298,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type: "POST",
-                url: "{{ route('car-amenities.store') }}",
+                url: "{{ route('car-location.store') }}",
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -340,7 +339,7 @@
  
     <script>
             function showEditForm(id) {
-                var url = '{{ route('car-amenities.edit', ':id') }}';
+                var url = '{{ route('car-location.edit', ':id') }}';
                 console.log(url);
                 $.ajax({
                     type: "GET",
@@ -353,7 +352,7 @@
                             // show toast message
 
                             $("#CatagoryItemID").val(resp.data.id);
-                            $("#title").val(resp.data.title);
+                            $("#location").val(resp.data.location);
                             $("#type").val(resp.data.type).trigger('change');
                             $('#CatagoryItemModal').modal('show');
                         } else if (resp.errors) {

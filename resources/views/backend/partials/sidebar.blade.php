@@ -79,13 +79,20 @@
 
         {{-- Car listing  Settings  --}}
         <li class="nav-item nav-category">Car Inventory Settings</li>
+        {{-- car-amenities --}}
         <li class="nav-item {{ isActiveRoute(['car-amenities.index']) }}">
             <a class="nav-link" href="{{ route('car-amenities.index') }}">
                 <i class="bi bi-card-checklist menu-icon"></i>
                 <span class="menu-title">Car Amenities</span>
             </a>
         </li>
-
+        {{-- Location --}}
+        <li class="nav-item {{ isActiveRoute(['car-location.index']) }}">
+            <a class="nav-link" href="{{ route('car-location.index') }}">
+                <i class="bi bi-geo-alt-fill menu-icon"></i>
+                <span class="menu-title">Locations</span>
+            </a>
+        </li>
 
 
 

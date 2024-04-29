@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\HomePage\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductPromotionsController;
 use App\Http\Controllers\Backend\CarInventory\CarAmenitiesController;
+use App\Http\Controllers\Backend\CarInventory\CarLocationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,7 +78,16 @@ Route::controller(HomePageSettingController::class)->prefix('home-page-setting')
 
 //car Inventory settings Start
 //Car ammenities
+
 Route::controller(CarAmenitiesController::class)->prefix('car-amenities')->name('car-amenities.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('store', 'store')->name('store');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/status/{id}', 'status')->name('status');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+});
+//location 
+Route::controller(CarLocationController::class)->prefix('car-location')->name('car-location.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('store', 'store')->name('store');
     Route::get('/edit/{id}', 'edit')->name('edit');
