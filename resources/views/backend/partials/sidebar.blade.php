@@ -86,6 +86,15 @@
                 <span class="menu-title">Car Amenities</span>
             </a>
         </li>
+
+        {{-- Car Type --}}
+        <li class="nav-item {{ isActiveRoute(['car-type.index']) }}">
+            <a class="nav-link" href="{{ route('car-type.index') }}">
+                <i class="bi bi-list-task menu-icon"></i>
+                <span class="menu-title">Car Type</span>
+            </a>
+        </li>
+
         {{-- Location --}}
         <li class="nav-item {{ isActiveRoute(['car-location.index']) }}">
             <a class="nav-link" href="{{ route('car-location.index') }}">
@@ -93,6 +102,8 @@
                 <span class="menu-title">Locations</span>
             </a>
         </li>
+        
+
 
 
 
