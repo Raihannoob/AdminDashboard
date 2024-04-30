@@ -314,6 +314,32 @@
                                     </div>
                                 </div>
 
+                                {{-- <div class="form-group row" id="imageUploadContainer">
+                                    <div class="col">
+                                        <label for="image">Car Thumbnail Image:</label>
+                                        <input type="file" required class="form-control form-control-md border-left-0 dropify" name="image[]" id="image" data-show-remove="true" value="{{ old('image', '') }}">
+                                        @error('image')
+                                            <span class="text-danger" role="alert">
+                                                <strong>Image is Required and size should not exceed 4MB.</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <button type="button" id="addImageInput" class="btn btn-primary">Add Another Image</button> --}}
+                                <button type="button" id="addImageInput" class="btn btn-primary" style="margin-left: 1368px;margin-bottom: 23px;">Add Another Image</button>
+                                {{-- <div id="imageUploadContainer"style="border: 1px solid #ced4da; padding: 10px;">
+                                    <div class="form-group row">
+                                        <div class="col">
+                                            <label for="image">Gallary Image:</label>
+                                            <input type="file" required class="form-control form-control-md border-left-0 dropify" name="image[]" id="image" data-show-remove="true" value="{{ old('image', '') }}">
+                                            @error('image')
+                                                <span class="text-danger" role="alert">
+                                                    <strong>Image is Required and size should not exceed 4MB.</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div> --}}
                                 <div class="form-group row" id="imageUploadContainer">
                                     <div class="col">
                                         <label for="image">Car Thumbnail Image:</label>
@@ -325,11 +351,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <button type="button" id="addImageInput" class="btn btn-primary">Add Another Image</button>
-                                
-
-
-
                                 <button type="submit" class="btn btn-primary me-2">Submit</button>
                                 <a href="{{ route('product.index') }}" class="btn btn-danger">Cancel</a>
                             </form>
@@ -365,19 +386,48 @@
             $('.js-example-basic-multiple').select2();
         });
     </script>
-   <script>
+   {{-- <script>
+    document.getElementById('addImageInput').addEventListener('click', function() {
+        var container = document.getElementById('imageUploadContainer');
+        var newInput = document.createElement('div');
+        newInput.classList.add('form-group', 'row');
+        newInput.innerHTML = `
+            <div class="col">
+                <label for="image">Gallary Image:</label>
+                <input type="file" required class="form-control form-control-md border-left-0 dropify" name="image[]" value="{{ old('image', '') }}" data-show-remove="true">
+                <button type="button" class="btn btn-danger remove-image" style="margin-top: 10px;margin-left: 1429px;">Remove</button>
+            </div>
+        `;
+        container.appendChild(newInput);
+
+        // Initialize Dropify for the new input field
+        $('.dropify').dropify();
+    });
+
+    // Event delegation to handle remove button click for dynamically added fields
+    $('#imageUploadContainer').on('click', '.remove-image', function() {
+        $(this).parent().parent().remove();
+    });
+</script> --}}
+<script>
     document.getElementById('addImageInput').addEventListener('click', function() {
         var container = document.getElementById('imageUploadContainer');
         var newInput = document.createElement('div');
         newInput.classList.add('col');
         newInput.innerHTML = `
             <label for="image">Car Thumbnail Image:</label>
-            <input type="file" required class="form-control form-control-md border-left-0 dropify" name="image[]" value="{{ old('image', '') }}">
+            <input type="file" required class="form-control form-control-md border-left-0 dropify" name="image[]" value="{{ old('image', '') }}" data-show-remove="true">
+            <button type="button" class="btn btn-danger remove-image" style="margin-top: 10px;"">X</button>
         `;
         container.appendChild(newInput);
 
         // Initialize Dropify for the new input field
         $('.dropify').dropify();
+    });
+
+    // Event delegation to handle remove button click for dynamically added fields
+    $('#imageUploadContainer').on('click', '.remove-image', function() {
+        $(this).parent().remove();
     });
 </script>
 @endpush
