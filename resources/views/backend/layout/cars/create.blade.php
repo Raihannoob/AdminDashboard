@@ -342,7 +342,7 @@
                                 </div> --}}
                                 <div class="form-group row" id="imageUploadContainer">
                                     <div class="col">
-                                        <label for="image">Car Thumbnail Image:</label>
+                                        <label for="image">Gallary Image:</label>
                                         <input type="file" required class="form-control form-control-md border-left-0 dropify" name="image[]" id="image" data-show-remove="true" value="{{ old('image', '') }}">
                                         @error('image')
                                             <span class="text-danger" role="alert">
@@ -415,7 +415,7 @@
         var newInput = document.createElement('div');
         newInput.classList.add('col');
         newInput.innerHTML = `
-            <label for="image">Car Thumbnail Image:</label>
+            <label for="image">Gallary Image:</label>
             <input type="file" required class="form-control form-control-md border-left-0 dropify" name="image[]" value="{{ old('image', '') }}" data-show-remove="true">
             <button type="button" class="btn btn-danger remove-image" style="margin-top: 10px;"">X</button>
         `;
