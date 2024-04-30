@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductPromotionsController;
 use App\Http\Controllers\Backend\CarInventory\CarAmenitiesController;
 use App\Http\Controllers\Backend\CarInventory\CarLocationController;
 use App\Http\Controllers\Backend\CarInventory\CarTypeController;
+use App\Http\Controllers\Backend\CarInventory\CarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -107,4 +108,15 @@ Route::controller(CarLocationController::class)->prefix('car-location')->name('c
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::get('/status/{id}', 'status')->name('status');
     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+});
+
+//Car Route
+Route::controller(CarController::class)->prefix('car-list')->name('car.list.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    // Route::post('/store', 'store')->name('store');
+    // Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+    // Route::get('/edit/{id}', 'edit')->name('edit');
+    // Route::get('/status/{id}', 'status')->name('status');
+    // Route::post('/update', 'update')->name('update');
 });

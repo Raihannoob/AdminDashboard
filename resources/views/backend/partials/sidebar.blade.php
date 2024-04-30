@@ -103,6 +103,13 @@
             </a>
         </li>
         
+         {{-- Cars --}}
+         <li class="nav-item {{ isActiveRoute(['car.list.index']) }}">
+            <a class="nav-link" href="{{ route('car.list.index') }}">
+                <i class="bi bi-cart-check-fill menu-icon"></i>
+                <span class="menu-title">Cars</span>
+            </a>
+        </li>
 
 
 
